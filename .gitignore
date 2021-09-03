@@ -17,6 +17,8 @@ target/
 .mvn
 .idea
 *.iml
+mvnw.cmd
+mvnw
 target
 aplication.properties
 
