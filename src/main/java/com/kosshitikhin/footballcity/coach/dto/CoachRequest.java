@@ -13,6 +13,7 @@ public class CoachRequest {
     @NotNull
     private String patronymic;
 
+    @NotNull
     private int age;
 
     public String getFirstName() {

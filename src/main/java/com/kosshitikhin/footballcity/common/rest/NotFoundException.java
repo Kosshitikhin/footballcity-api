@@ -17,4 +17,8 @@ public class NotFoundException extends RuntimeException{
     public static NotFoundException coach() {
         return new NotFoundException("Such a coach not exists.");
     }
+
+    public static NotFoundException player() {
+        return new NotFoundException("Such a player not exists in this league.");
+    }
 }
