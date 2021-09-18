@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
+import java.time.LocalDate;
+import java.time.Period;
+
 @Slf4j
 @Getter
 @Setter
@@ -27,7 +30,7 @@ public class PlayerDto {
         this.firstName = player.getFirstName();
         this.surname = player.getSurname();
         this.patronymic = player.getPatronymic();
-        this.age = player.getAge();
+        this.age = calculateAge(player.getBirthday());
     }
 
     public PlayerDto(Player player, Team team, League league) {
@@ -37,6 +40,13 @@ public class PlayerDto {
         this.firstName = player.getFirstName();
         this.surname = player.getSurname();
         this.patronymic = player.getPatronymic();
-        this.age = player.getAge();
+        this.age = calculateAge(player.getBirthday());
+    }
+
+    private int calculateAge(LocalDate birthday) {
+        if (birthday != null) {
+            return Period.between(birthday, LocalDate.now()).getYears();
+        }
+        return 0;
     }
 }

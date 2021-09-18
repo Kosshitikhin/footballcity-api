@@ -5,7 +5,7 @@ import com.kosshitikhin.footballcity.coach.dto.CoachRequest;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("leagues/{leagueId}/teams/{teamId}/coach")
+@RequestMapping("leagues/{leagueId}")
 public class CoachController {
 
     private final CoachService coachService;
@@ -14,32 +14,29 @@ public class CoachController {
         this.coachService = coachService;
     }
 
-    @GetMapping("{coachId}")
+    @GetMapping("coach/{coachId}")
     public CoachDto getCoach(@PathVariable Long leagueId,
-                             @PathVariable Long teamId,
                              @PathVariable Long coachId) {
-        return coachService.getCoach(leagueId, teamId, coachId);
+        return coachService.getCoach(leagueId, coachId);
     }
 
-    @PostMapping
+    @PostMapping("/teams/{teamId}/coach")
     public CoachDto addCoach(@PathVariable Long leagueId,
                              @PathVariable Long teamId,
                              @RequestBody CoachRequest request) {
         return coachService.addCoach(leagueId, teamId, request);
     }
 
-    @PutMapping("{coachId}")
+    @PutMapping("coach/{coachId}")
     public CoachDto updateCoach(@PathVariable Long leagueId,
-                                @PathVariable Long teamId,
                                 @PathVariable Long coachId,
                                 @RequestBody CoachRequest request) {
-        return coachService.updateCoach(leagueId, teamId, coachId, request);
+        return coachService.updateCoach(leagueId, coachId, request);
     }
 
-    @DeleteMapping("{coachId}")
+    @DeleteMapping("coach/{coachId}")
     public void deleteCoach(@PathVariable Long leagueId,
-                            @PathVariable Long teamId,
                             @PathVariable Long coachId) {
-        coachService.deleteCoach(leagueId, teamId, coachId);
+        coachService.deleteCoach(leagueId, coachId);
     }
 }

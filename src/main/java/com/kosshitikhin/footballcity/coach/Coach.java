@@ -5,6 +5,7 @@ import com.kosshitikhin.footballcity.league.League;
 import com.kosshitikhin.footballcity.team.Team;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -20,11 +21,11 @@ public class Coach extends NamedEntity {
 
     }
 
-    public Coach(String firstName, String surname, String patronymic, int age, Team team, League league) {
+    public Coach(String firstName, String surname, String patronymic, LocalDate birthday, Team team, League league) {
         this.firstName = firstName;
         this.surname = surname;
         this.patronymic = patronymic;
-        this.age = age;
+        this.birthday = birthday;
         this.team = team;
         this.league = league;
     }

@@ -6,5 +6,5 @@ import java.util.Optional;
 
 public interface CoachRepository extends JpaRepository<Coach, Long> {
 
-    Optional<Coach> getByLeagueIdAndTeamIdAndId(Long leagueId, Long teamId, Long coachId);
+    Optional<Coach> findByLeagueIdAndId(Long leagueId, Long coachId);
 }
