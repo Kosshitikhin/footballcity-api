@@ -5,6 +5,7 @@ import com.kosshitikhin.footballcity.league.League;
 import com.kosshitikhin.footballcity.team.Team;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Objects;
 
 
@@ -21,20 +22,20 @@ public class Player extends NamedEntity {
 
     }
 
-    public Player(String firstName, String surname, String patronymic, int age, Team team, League league) {
+    public Player(String firstName, String surname, String patronymic, LocalDate birthday, Team team, League league) {
         this.firstName = firstName;
         this.surname = surname;
         this.patronymic = patronymic;
-        this.age = age;
+        this.birthday = birthday;
         this.team = team;
         this.league = league;
     }
 
-    public Player(String firstName, String surname, String patronymic, int age) {
+    public Player(String firstName, String surname, String patronymic, LocalDate birthday) {
         this.firstName = firstName;
         this.surname = surname;
         this.patronymic = patronymic;
-        this.age = age;
+        this.birthday = birthday;
     }
 
     public Team getTeam() {

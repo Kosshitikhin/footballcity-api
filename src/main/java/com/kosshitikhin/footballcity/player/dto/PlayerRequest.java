@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 
 @Slf4j
 @Setter
@@ -21,6 +22,6 @@ public class PlayerRequest {
     private String patronymic;
 
     @NotNull
-    private int age;
+    private LocalDate birthday;
 
 }

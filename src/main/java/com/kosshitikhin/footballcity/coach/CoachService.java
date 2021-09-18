@@ -9,6 +9,8 @@ import com.kosshitikhin.footballcity.team.Team;
 import com.kosshitikhin.footballcity.team.TeamRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+
 @Service
 public class CoachService {
 
@@ -22,8 +24,8 @@ public class CoachService {
         this.teamRepository = teamRepository;
     }
 
-    public CoachDto getCoach(Long leagueId, Long teamId, Long coachId) {
-        Coach coach = coachRepository.getByLeagueIdAndTeamIdAndId(leagueId, teamId, coachId).orElseThrow(NotFoundException::coach);
+    public CoachDto getCoach(Long leagueId, Long coachId) {
+        Coach coach = coachRepository.findByLeagueIdAndId(leagueId, coachId).orElseThrow(NotFoundException::coach);
         return new CoachDto(coach);
     }
 
@@ -33,23 +35,23 @@ public class CoachService {
         String firstName = request.getFirstName();
         String surname = request.getSurname();
         String patronymic = request.getPatronymic();
-        int age = request.getAge();
-        Coach coach = new Coach(firstName, surname, patronymic, age, team, league);
+        LocalDate birthday = request.getBirthday();
+        Coach coach = new Coach(firstName, surname, patronymic, birthday, team, league);
         return new CoachDto(coachRepository.save(coach));
     }
 
-    public CoachDto updateCoach(Long leagueId, Long teamId, Long coachId, CoachRequest request) {
-        Coach coach = coachRepository.getByLeagueIdAndTeamIdAndId(leagueId, teamId, coachId).orElseThrow(NotFoundException::coach);
+    public CoachDto updateCoach(Long leagueId, Long coachId, CoachRequest request) {
+        Coach coach = coachRepository.findByLeagueIdAndId(leagueId, coachId).orElseThrow(NotFoundException::coach);
         coach.setFirstName(request.getFirstName());
         coach.setSurname(request.getSurname());
         coach.setPatronymic(request.getPatronymic());
-        coach.setAge(request.getAge());
+        coach.setBirthday(request.getBirthday());
 
         return new CoachDto(coachRepository.save(coach));
     }
 
-    public void deleteCoach(Long leagueId, Long teamId, Long coachId) {
-        Coach coach = coachRepository.getByLeagueIdAndTeamIdAndId(leagueId, teamId, coachId).orElseThrow(NotFoundException::coach);
+    public void deleteCoach(Long leagueId, Long coachId) {
+        Coach coach = coachRepository.findByLeagueIdAndId(leagueId, coachId).orElseThrow(NotFoundException::coach);
         coachRepository.delete(coach);
     }
 }

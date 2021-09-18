@@ -2,6 +2,7 @@ package com.kosshitikhin.footballcity.common.dbo;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @MappedSuperclass
@@ -17,18 +18,18 @@ public abstract class NamedEntity extends IdEntity{
     protected String patronymic;
 
     @Column(nullable = false)
-    protected int age;
+    protected LocalDate birthday;
 
     public NamedEntity() {
 
     }
 
-    public NamedEntity(Long id, String firstName, String surname, String patronymic, int age) {
+    public NamedEntity(Long id, String firstName, String surname, String patronymic, LocalDate birthday) {
         super(id);
         this.firstName = firstName;
         this.surname = surname;
         this.patronymic = patronymic;
-        this.age = age;
+        this.birthday = birthday;
     }
 
     public String getFirstName() {
@@ -55,12 +56,12 @@ public abstract class NamedEntity extends IdEntity{
         this.patronymic = patronymic;
     }
 
-    public int getAge() {
-        return age;
+    public LocalDate getBirthday() {
+        return birthday;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
     }
 
     @Override
@@ -69,7 +70,7 @@ public abstract class NamedEntity extends IdEntity{
                 "firstName='" + firstName + '\'' +
                 ", surname='" + surname + '\'' +
                 ", patronymic='" + patronymic + '\'' +
-                ", age=" + age +
+                ", age=" + birthday +
                 '}';
     }
 
@@ -77,7 +78,7 @@ public abstract class NamedEntity extends IdEntity{
     public boolean equals(Object o) {
         if (!super.equals(o)) return false;
         NamedEntity that = (NamedEntity) o;
-        return age == that.getAge() &&
+        return birthday == that.getBirthday() &&
                 Objects.equals(firstName, that.getFirstName()) &&
                 Objects.equals(surname, that.getFirstName()) &&
                 Objects.equals(patronymic, that.getPatronymic());
@@ -85,6 +86,6 @@ public abstract class NamedEntity extends IdEntity{
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), firstName, surname, patronymic, age);
+        return Objects.hash(super.hashCode(), firstName, surname, patronymic, birthday);
     }
 }
