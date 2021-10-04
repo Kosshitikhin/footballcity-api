@@ -2,9 +2,11 @@ package com.kosshitikhin.footballcity.league;
 
 import com.kosshitikhin.footballcity.coach.Coach;
 import com.kosshitikhin.footballcity.common.dbo.IdEntity;
+import com.kosshitikhin.footballcity.match.Match;
 import com.kosshitikhin.footballcity.team.Team;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -20,10 +22,13 @@ public class League extends IdEntity {
     private String endYear;
 
     @OneToMany(mappedBy = "league", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    private Set<Coach> coach;
+    private Set<Coach> coaches;
 
     @OneToMany(mappedBy = "league", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Team> teams;
+
+    @OneToMany
+    private Set<Match> matches;
 
     public League() {
 
@@ -59,12 +64,12 @@ public class League extends IdEntity {
         this.endYear = endYear;
     }
 
-    public Set<Coach> getCoach() {
-        return coach;
+    public Set<Coach> getCoaches() {
+        return coaches;
     }
 
-    public void setCoach(Set<Coach> coach) {
-        this.coach = coach;
+    public void setCoaches(Set<Coach> coach) {
+        this.coaches = coach;
     }
 
     public Set<Team> getTeams() {
@@ -75,4 +80,30 @@ public class League extends IdEntity {
         this.teams = teams;
     }
 
+    public Set<Match> getMatches() {
+        return matches;
+    }
+
+    public void setMatches(Set<Match> matches) {
+        this.matches = matches;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof League)) return false;
+        if (!super.equals(o)) return false;
+        League league = (League) o;
+        return Objects.equals(name, league.getName()) &&
+                Objects.equals(startYear, league.getStartYear()) &&
+                Objects.equals(endYear, league.getEndYear()) &&
+                Objects.equals(coaches, league.getCoaches()) &&
+                Objects.equals(teams, league.getTeams()) &&
+                Objects.equals(matches, league.getMatches());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), name, startYear, endYear, coaches, teams, matches);
+    }
 }
