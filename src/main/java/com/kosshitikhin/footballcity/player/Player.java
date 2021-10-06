@@ -58,11 +58,12 @@ public class Player extends NamedEntity {
     public boolean equals(Object o) {
         if (!super.equals(o)) return false;
         Player player = (Player) o;
-        return team.equals(player.getTeam());
+        return Objects.equals(team, player.getTeam()) &&
+                Objects.equals(league, player.getLeague());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), team);
+        return Objects.hash(super.hashCode(), team, league);
     }
 }

@@ -131,16 +131,16 @@ public class TeamStatistics extends IdEntity {
     @Override
     public boolean equals(Object o) {
         if (!super.equals(o)) return false;
-        TeamStatistics TeamStatistics = (TeamStatistics) o;
-        return getPlayedGames() == TeamStatistics.getPlayedGames() &&
-                getWinGames() == TeamStatistics.getWinGames() &&
-                getDrawGames() == TeamStatistics.getDrawGames() &&
-                getLostGames() == TeamStatistics.getLostGames() &&
-                getScoredGoals() == TeamStatistics.getScoredGoals() &&
-                getConcededGoals() == TeamStatistics.getConcededGoals() &&
-                getGoalDifference() == TeamStatistics.getGoalDifference() &&
-                getPointsScored() == TeamStatistics.getPointsScored() &&
-                Objects.equals(league, TeamStatistics.league);
+        TeamStatistics teamStatistics = (TeamStatistics) o;
+        return getPlayedGames() == teamStatistics.getPlayedGames() &&
+                getWinGames() == teamStatistics.getWinGames() &&
+                getDrawGames() == teamStatistics.getDrawGames() &&
+                getLostGames() == teamStatistics.getLostGames() &&
+                getScoredGoals() == teamStatistics.getScoredGoals() &&
+                getConcededGoals() == teamStatistics.getConcededGoals() &&
+                getGoalDifference() == teamStatistics.getGoalDifference() &&
+                getPointsScored() == teamStatistics.getPointsScored() &&
+                Objects.equals(league, teamStatistics.league);
     }
 
     @Override
