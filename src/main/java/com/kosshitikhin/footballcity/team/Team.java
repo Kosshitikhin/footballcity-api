@@ -3,6 +3,7 @@ package com.kosshitikhin.footballcity.team;
 import com.kosshitikhin.footballcity.coach.Coach;
 import com.kosshitikhin.footballcity.common.dbo.IdEntity;
 import com.kosshitikhin.footballcity.league.League;
+import com.kosshitikhin.footballcity.match.Match;
 import com.kosshitikhin.footballcity.player.Player;
 import com.kosshitikhin.footballcity.statistics.TeamStatistics;
 
@@ -27,6 +28,9 @@ public class Team extends IdEntity {
 
     @OneToOne(cascade = CascadeType.REMOVE)
     private TeamStatistics teamStatistics;
+
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private Set<Match> match;
 
     public Team() {
     }
@@ -75,6 +79,13 @@ public class Team extends IdEntity {
         this.teamStatistics = teamStatistics;
     }
 
+    public Set<Match> getMatch() {
+        return match;
+    }
+
+    public void setMatch(Set<Match> match) {
+        this.match = match;
+    }
 
     @Override
     public boolean equals(Object o) {

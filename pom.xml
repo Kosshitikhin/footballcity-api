@@ -5,8 +5,11 @@
     <groupId>footballcity-backend</groupId>
     <artifactId>footballcity-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>war</packaging>
+
     <name>FootballCity</name>
     <description>footballcity-api</description>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
