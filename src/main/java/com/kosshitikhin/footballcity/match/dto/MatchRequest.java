@@ -1,10 +1,10 @@
 package com.kosshitikhin.footballcity.match.dto;
 
-import com.kosshitikhin.footballcity.match.goals.Goal;
+import com.kosshitikhin.footballcity.goals.Goal;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Set;
 
 public class MatchRequest {
     @NotNull
@@ -25,7 +25,7 @@ public class MatchRequest {
     @NotNull
     private int tour;
 
-    private List<Goal> authorsOfGoals;
+    private Set<Goal> authorsOfGoals;
 
     public String getNameHomeTeam() {
         return nameHomeTeam;
@@ -75,11 +75,11 @@ public class MatchRequest {
         this.tour = tour;
     }
 
-    public List<Goal> getAuthorsOfGoals() {
+    public Set<Goal> getAuthorsOfGoals() {
         return authorsOfGoals;
     }
 
-    public void setAuthorsOfGoals(List<Goal> authorsOfGoals) {
+    public void setAuthorsOfGoals(Set<Goal> authorsOfGoals) {
         this.authorsOfGoals = authorsOfGoals;
     }
 }

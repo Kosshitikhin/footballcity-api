@@ -1,6 +1,6 @@
-package com.kosshitikhin.footballcity.match.goals;
+package com.kosshitikhin.footballcity.goals;
 
-public class Goal {
+public class GoalRequest {
 
     private String firstName;
 
@@ -8,14 +8,7 @@ public class Goal {
 
     private int minute;
 
-    public Goal() {
-    }
-
-    public Goal(String firstName, String surname, int minute) {
-        this.firstName = firstName;
-        this.surname = surname;
-        this.minute = minute;
-    }
+    private int rowGoal;
 
     public String getFirstName() {
         return firstName;
@@ -39,5 +32,13 @@ public class Goal {
 
     public void setMinute(int minute) {
         this.minute = minute;
+    }
+
+    public int getRowGoal() {
+        return rowGoal;
+    }
+
+    public void setRowGoal(int rowGoal) {
+        this.rowGoal = rowGoal;
     }
 }

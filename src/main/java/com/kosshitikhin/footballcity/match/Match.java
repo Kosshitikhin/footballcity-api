@@ -1,29 +1,33 @@
 package com.kosshitikhin.footballcity.match;
 
 import com.kosshitikhin.footballcity.common.dbo.IdEntity;
+import com.kosshitikhin.footballcity.goals.Goal;
 import com.kosshitikhin.footballcity.league.League;
 import com.kosshitikhin.footballcity.team.Team;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Match extends IdEntity {
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private League league;
 
-    @OneToOne(optional = false)
-    @Column(nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Team homeTeam;
 
-    @OneToOne(optional = false)
-    @Column(nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Team awayTeam;
 
     @Column(nullable = false)
     private LocalDateTime matchDay;
+
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private Set<Goal> goals;
 
     private int tour;
     private int homeGoals;
@@ -75,6 +79,14 @@ public class Match extends IdEntity {
         this.matchDay = matchDay;
     }
 
+    public Set<Goal> getGoals() {
+        return goals;
+    }
+
+    public void setGoals(Set<Goal> goals) {
+        this.goals = goals;
+    }
+
     public int getTour() {
         return tour;
     }
@@ -97,6 +109,19 @@ public class Match extends IdEntity {
 
     public void setAwayGoals(int awayGoals) {
         this.awayGoals = awayGoals;
+    }
+
+    public void addGoal(Goal goal) {
+        if (goals == null) {
+            goals= new HashSet<>();
+            goals.add(goal);
+        } else {
+            goals.add(goal);
+        }
+    }
+
+    public void deleteGoal(Goal goal) {
+        goals.remove(goal);
     }
 
     @Override

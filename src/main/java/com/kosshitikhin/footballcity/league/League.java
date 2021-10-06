@@ -2,6 +2,7 @@ package com.kosshitikhin.footballcity.league;
 
 import com.kosshitikhin.footballcity.coach.Coach;
 import com.kosshitikhin.footballcity.common.dbo.IdEntity;
+import com.kosshitikhin.footballcity.goals.Goal;
 import com.kosshitikhin.footballcity.match.Match;
 import com.kosshitikhin.footballcity.team.Team;
 
@@ -27,8 +28,11 @@ public class League extends IdEntity {
     @OneToMany(mappedBy = "league", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Team> teams;
 
-    @OneToMany
+    @OneToMany(mappedBy = "league", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Match> matches;
+
+    @OneToMany(mappedBy = "league", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private Set<Goal> goals;
 
     public League() {
 
@@ -88,6 +92,14 @@ public class League extends IdEntity {
         this.matches = matches;
     }
 
+    public Set<Goal> getGoals() {
+        return goals;
+    }
+
+    public void setGoals(Set<Goal> goals) {
+        this.goals = goals;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -96,14 +108,11 @@ public class League extends IdEntity {
         League league = (League) o;
         return Objects.equals(name, league.getName()) &&
                 Objects.equals(startYear, league.getStartYear()) &&
-                Objects.equals(endYear, league.getEndYear()) &&
-                Objects.equals(coaches, league.getCoaches()) &&
-                Objects.equals(teams, league.getTeams()) &&
-                Objects.equals(matches, league.getMatches());
+                Objects.equals(endYear, league.getEndYear());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), name, startYear, endYear, coaches, teams, matches);
+        return Objects.hash(super.hashCode(), name, startYear, endYear);
     }
 }
