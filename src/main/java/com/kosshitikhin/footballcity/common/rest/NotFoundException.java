@@ -29,4 +29,8 @@ public class NotFoundException extends RuntimeException{
     public static NotFoundException goal() {
         return new NotFoundException("Such a goal not exists.");
     }
+
+    public static NotFoundException teamStatistics() {
+        return new NotFoundException("Such a statistics not found.");
+    }
 }

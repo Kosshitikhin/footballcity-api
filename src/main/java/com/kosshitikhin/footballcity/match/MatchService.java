@@ -5,6 +5,7 @@ import com.kosshitikhin.footballcity.league.League;
 import com.kosshitikhin.footballcity.league.LeagueRepository;
 import com.kosshitikhin.footballcity.match.dto.MatchDto;
 import com.kosshitikhin.footballcity.match.dto.MatchRequest;
+import com.kosshitikhin.footballcity.statistics.teams.TeamStatisticsService;
 import com.kosshitikhin.footballcity.team.Team;
 import com.kosshitikhin.footballcity.team.TeamRepository;
 import org.springframework.stereotype.Service;
@@ -17,13 +18,16 @@ public class MatchService {
     private final MatchRepository matchRepository;
     private final LeagueRepository leagueRepository;
     private final TeamRepository teamRepository;
+    private final TeamStatisticsService teamStatisticsService;
 
     public MatchService(MatchRepository matchRepository,
                         LeagueRepository leagueRepository,
-                        TeamRepository teamRepository) {
+                        TeamRepository teamRepository,
+                        TeamStatisticsService teamStatisticsService) {
         this.matchRepository = matchRepository;
         this.leagueRepository = leagueRepository;
         this.teamRepository = teamRepository;
+        this.teamStatisticsService = teamStatisticsService;
     }
 
     public MatchDto getMatch(Long leagueId, Long matchId) {
@@ -39,6 +43,9 @@ public class MatchService {
         int tour = request.getTour();
         int homeGoals = request.getHomeGoals();
         int awayGoals = request.getAwayGoals();
+
+        teamStatisticsService.editTeamStatistic(league, homeTeam, awayTeam, homeGoals, awayGoals);
+
         return new MatchDto(matchRepository.save(new Match(league, homeTeam, awayTeam, matchDay, tour, homeGoals, awayGoals)));
     }
 
