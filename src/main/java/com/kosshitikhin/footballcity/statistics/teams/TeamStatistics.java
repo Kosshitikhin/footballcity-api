@@ -1,4 +1,4 @@
-package com.kosshitikhin.footballcity.statistics;
+package com.kosshitikhin.footballcity.statistics.teams;
 
 import com.kosshitikhin.footballcity.common.dbo.IdEntity;
 import com.kosshitikhin.footballcity.league.League;
@@ -41,7 +41,20 @@ public class TeamStatistics extends IdEntity {
     private Team team;
 
     public TeamStatistics() {
+        this.playedGames = 0;
+        this.winGames = 0;
+        this.drawGames = 0;
+        this.lostGames = 0;
+        this.scoredGoals = 0;
+        this.concededGoals = 0;
+        this.goalDifference = 0;
+        this.pointsScored = 0;
+    }
 
+    public TeamStatistics(League league, Team team) {
+        this();
+        this.league = league;
+        this.team = team;
     }
 
     public TeamStatistics(League league) {
@@ -132,14 +145,14 @@ public class TeamStatistics extends IdEntity {
     public boolean equals(Object o) {
         if (!super.equals(o)) return false;
         TeamStatistics teamStatistics = (TeamStatistics) o;
-        return getPlayedGames() == teamStatistics.getPlayedGames() &&
-                getWinGames() == teamStatistics.getWinGames() &&
-                getDrawGames() == teamStatistics.getDrawGames() &&
-                getLostGames() == teamStatistics.getLostGames() &&
-                getScoredGoals() == teamStatistics.getScoredGoals() &&
-                getConcededGoals() == teamStatistics.getConcededGoals() &&
-                getGoalDifference() == teamStatistics.getGoalDifference() &&
-                getPointsScored() == teamStatistics.getPointsScored() &&
+        return playedGames == teamStatistics.getPlayedGames() &&
+                winGames == teamStatistics.getWinGames() &&
+                drawGames == teamStatistics.getDrawGames() &&
+                lostGames == teamStatistics.getLostGames() &&
+                scoredGoals == teamStatistics.getScoredGoals() &&
+                concededGoals == teamStatistics.getConcededGoals() &&
+                goalDifference == teamStatistics.getGoalDifference() &&
+                pointsScored == teamStatistics.getPointsScored() &&
                 Objects.equals(league, teamStatistics.league);
     }
 

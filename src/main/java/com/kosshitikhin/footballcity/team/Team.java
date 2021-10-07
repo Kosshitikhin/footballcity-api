@@ -5,7 +5,7 @@ import com.kosshitikhin.footballcity.common.dbo.IdEntity;
 import com.kosshitikhin.footballcity.league.League;
 import com.kosshitikhin.footballcity.match.Match;
 import com.kosshitikhin.footballcity.player.Player;
-import com.kosshitikhin.footballcity.statistics.TeamStatistics;
+import com.kosshitikhin.footballcity.statistics.teams.TeamStatistics;
 
 import javax.persistence.*;
 import java.util.Objects;
