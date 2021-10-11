@@ -11,7 +11,7 @@ import java.util.Objects;
 @Entity
 public class Coach extends NamedEntity {
 
-    @OneToOne(optional = false)
+    @OneToOne(optional = false, fetch = FetchType.LAZY)
     private Team team;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

@@ -2,6 +2,7 @@ package com.kosshitikhin.footballcity.player;
 
 import com.kosshitikhin.footballcity.player.dto.PlayerDto;
 import com.kosshitikhin.footballcity.player.dto.PlayerRequest;
+import com.kosshitikhin.footballcity.statistics.PlayerStatisticsDto;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -45,5 +46,10 @@ public class PlayerController {
     public void deletePlayer(@PathVariable Long leagueId,
                              @PathVariable Long playerId) {
         playerService.deletePlayer(leagueId, playerId);
+    }
+
+    @GetMapping("player/{playerId}/statistics")
+    public PlayerStatisticsDto getPlayerStatistics(@PathVariable Long leagueId, @PathVariable Long playerId) {
+        return null;
     }
 }

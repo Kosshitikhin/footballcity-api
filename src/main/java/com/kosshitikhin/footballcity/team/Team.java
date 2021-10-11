@@ -5,7 +5,6 @@ import com.kosshitikhin.footballcity.common.dbo.IdEntity;
 import com.kosshitikhin.footballcity.league.League;
 import com.kosshitikhin.footballcity.match.Match;
 import com.kosshitikhin.footballcity.player.Player;
-import com.kosshitikhin.footballcity.statistics.teams.TeamStatistics;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -20,13 +19,13 @@ public class Team extends IdEntity {
     @OneToMany(mappedBy = "team", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Player> players;
 
-    @OneToOne(cascade = CascadeType.REMOVE)
+    @OneToOne(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Coach coach;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private League league;
 
-    @OneToOne(cascade = CascadeType.REMOVE)
+    @OneToOne(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private TeamStatistics teamStatistics;
 
     @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)

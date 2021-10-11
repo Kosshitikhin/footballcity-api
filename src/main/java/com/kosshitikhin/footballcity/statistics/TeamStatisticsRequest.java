@@ -1,4 +1,4 @@
-package com.kosshitikhin.footballcity.statistics.teams.dto;
+package com.kosshitikhin.footballcity.statistics;
 
 import javax.validation.constraints.NotNull;
 

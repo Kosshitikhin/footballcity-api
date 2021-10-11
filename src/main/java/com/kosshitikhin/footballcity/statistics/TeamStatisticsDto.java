@@ -1,6 +1,5 @@
-package com.kosshitikhin.footballcity.statistics.teams.dto;
+package com.kosshitikhin.footballcity.statistics;
 
-import com.kosshitikhin.footballcity.statistics.teams.TeamStatistics;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -26,15 +25,7 @@ public class TeamStatisticsDto {
 
     private int pointsScored;
 
-    public TeamStatisticsDto(TeamStatistics ts) {
-        this.playedGames =  ts.getPlayedGames();
-        this.winGames = ts.getWinGames();
-        this.drawGames = ts.getDrawGames();
-        this.lostGames = ts.getLostGames();
-        this.scoredGoals = ts.getScoredGoals();
-        this.concededGoals = ts.getConcededGoals();
-        this.goalDifference = ts.getGoalDifference();
-        this.pointsScored = ts.getPointsScored();
+    public TeamStatisticsDto() {
     }
 
     public TeamStatisticsDto(int playedGames,

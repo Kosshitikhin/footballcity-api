@@ -1,10 +1,16 @@
 package com.kosshitikhin.footballcity.player;
 
+import com.kosshitikhin.footballcity.assists.AssistRepository;
+import com.kosshitikhin.footballcity.cards.Card;
+import com.kosshitikhin.footballcity.cards.CardRepository;
 import com.kosshitikhin.footballcity.common.rest.NotFoundException;
+import com.kosshitikhin.footballcity.goals.GoalRepository;
 import com.kosshitikhin.footballcity.league.League;
 import com.kosshitikhin.footballcity.league.LeagueRepository;
+import com.kosshitikhin.footballcity.match.MatchRepository;
 import com.kosshitikhin.footballcity.player.dto.PlayerDto;
 import com.kosshitikhin.footballcity.player.dto.PlayerRequest;
+import com.kosshitikhin.footballcity.statistics.PlayerStatisticsDto;
 import com.kosshitikhin.footballcity.team.Team;
 import com.kosshitikhin.footballcity.team.TeamRepository;
 import org.springframework.stereotype.Service;
@@ -19,11 +25,25 @@ public class PlayerService {
     private final PlayerRepository playerRepository;
     private final TeamRepository teamRepository;
     private final LeagueRepository leagueRepository;
+    private final MatchRepository matchRepository;
+    private final GoalRepository goalRepository;
+    private final AssistRepository assistRepository;
+    private final CardRepository cardRepository;
 
-    public PlayerService(PlayerRepository playerRepository, TeamRepository teamRepository, LeagueRepository leagueRepository) {
+    public PlayerService(PlayerRepository playerRepository,
+                         TeamRepository teamRepository,
+                         LeagueRepository leagueRepository,
+                         MatchRepository matchRepository,
+                         GoalRepository goalRepository,
+                         AssistRepository assistRepository,
+                         CardRepository cardRepository) {
         this.playerRepository = playerRepository;
         this.teamRepository = teamRepository;
         this.leagueRepository = leagueRepository;
+        this.matchRepository = matchRepository;
+        this.goalRepository = goalRepository;
+        this.assistRepository = assistRepository;
+        this.cardRepository = cardRepository;
     }
 
     public PlayerDto getPlayer(Long leagueId, Long playerId) {
@@ -62,5 +82,16 @@ public class PlayerService {
     public void deletePlayer(Long leagueId, Long playerId) {
         Player player = playerRepository.findByLeagueIdAndId(leagueId, playerId).orElseThrow(NotFoundException::player);
         playerRepository.delete(player);
+    }
+
+    public PlayerStatisticsDto getPlayerStatistics(Long leagueId, Long playerId) {
+        Long teamId = playerRepository.findById(playerId).orElseThrow(NotFoundException::player).getTeam().getId();
+        return new PlayerStatisticsDto(
+                matchRepository.countAllByLeagueIdAndHomeTeamId(leagueId, teamId) + matchRepository.countAllByLeagueIdAndAwayTeamId(leagueId, teamId),
+                goalRepository.countAllByLeagueIdAndPlayerId(leagueId, playerId),
+                assistRepository.countAllByLeagueIdAndPlayerId(leagueId, playerId),
+                cardRepository.countAllByLeagueIdAndPlayerIdAndColor(leagueId, playerId, Card.Color.YELLOW),
+                cardRepository.countAllByLeagueIdAndPlayerIdAndColor(leagueId, playerId, Card.Color.RED)
+        );
     }
 }
