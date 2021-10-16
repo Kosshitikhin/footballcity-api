@@ -1,9 +1,13 @@
 package com.kosshitikhin.footballcity.goals;
 
+import com.kosshitikhin.footballcity.goals.dto.GoalDto;
+import com.kosshitikhin.footballcity.goals.dto.GoalRequest;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("matches/{matchId}/goals")
+@RequestMapping("leagues/{leagueId}")
 public class GoalController {
 
     private final GoalService goalService;
@@ -12,13 +16,23 @@ public class GoalController {
         this.goalService = goalService;
     }
 
-    @PutMapping("add")
-    public void addGoal(@PathVariable Long matchId, @RequestBody GoalRequest request) {
-        goalService.addGoal(matchId, request);
+    @PostMapping("matches/{matchId}/teams/{teamId}/goals/add")
+    public void addGoal(@PathVariable Long leagueId,
+                        @PathVariable Long matchId,
+                        @PathVariable Long teamId,
+                        @RequestBody GoalRequest request) {
+        goalService.addGoal(leagueId, matchId, teamId, request);
     }
 
-    @PutMapping("{goalId}/delete")
-    public void deleteGoal(@PathVariable Long matchId, @PathVariable Long goalId) {
-        goalService.deleteGoal(matchId, goalId);
+    @DeleteMapping("matches/{matchId}/goals/{goalId}/delete")
+    public void deleteGoal(@PathVariable Long leagueId,
+                           @PathVariable Long matchId,
+                           @PathVariable Long goalId) {
+        goalService.deleteGoal(leagueId, matchId, goalId);
+    }
+
+    @GetMapping("players/{playerId}/goals")
+    public List<GoalDto> getAllGoalsOfPlayerFromLeague(@PathVariable Long leagueId, @PathVariable Long playerId) {
+        return goalService.getAllGoalsOfPlayerFromLeague(leagueId, playerId);
     }
 }

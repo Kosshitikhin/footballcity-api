@@ -1,5 +1,7 @@
 package com.kosshitikhin.footballcity.match;
 
+import com.kosshitikhin.footballcity.assists.Assist;
+import com.kosshitikhin.footballcity.cards.Card;
 import com.kosshitikhin.footballcity.common.dbo.IdEntity;
 import com.kosshitikhin.footballcity.goals.Goal;
 import com.kosshitikhin.footballcity.league.League;
@@ -7,14 +9,14 @@ import com.kosshitikhin.footballcity.team.Team;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
 public class Match extends IdEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     private League league;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -27,7 +29,13 @@ public class Match extends IdEntity {
     private LocalDateTime matchDay;
 
     @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    private Set<Goal> goals;
+    private List<Goal> goals;
+
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private Set<Card> cards;
+
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private Set<Assist> assists;
 
     private int tour;
     private int homeGoals;
@@ -79,14 +87,6 @@ public class Match extends IdEntity {
         this.matchDay = matchDay;
     }
 
-    public Set<Goal> getGoals() {
-        return goals;
-    }
-
-    public void setGoals(Set<Goal> goals) {
-        this.goals = goals;
-    }
-
     public int getTour() {
         return tour;
     }
@@ -111,17 +111,28 @@ public class Match extends IdEntity {
         this.awayGoals = awayGoals;
     }
 
-    public void addGoal(Goal goal) {
-        if (goals == null) {
-            goals= new HashSet<>();
-            goals.add(goal);
-        } else {
-            goals.add(goal);
-        }
+    public List<Goal> getGoals() {
+        return goals;
     }
 
-    public void deleteGoal(Goal goal) {
-        goals.remove(goal);
+    public void setGoals(List<Goal> goals) {
+        this.goals = goals;
+    }
+
+    public Set<Card> getCards() {
+        return cards;
+    }
+
+    public void setCards(Set<Card> cards) {
+        this.cards = cards;
+    }
+
+    public Set<Assist> getAssists() {
+        return assists;
+    }
+
+    public void setAssists(Set<Assist> assists) {
+        this.assists = assists;
     }
 
     @Override

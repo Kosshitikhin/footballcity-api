@@ -1,8 +1,6 @@
 package com.kosshitikhin.footballcity.league;
 
-import com.kosshitikhin.footballcity.coach.Coach;
 import com.kosshitikhin.footballcity.common.dbo.IdEntity;
-import com.kosshitikhin.footballcity.goals.Goal;
 import com.kosshitikhin.footballcity.match.Match;
 import com.kosshitikhin.footballcity.team.Team;
 
@@ -23,16 +21,10 @@ public class League extends IdEntity {
     private String endYear;
 
     @OneToMany(mappedBy = "league", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    private Set<Coach> coaches;
-
-    @OneToMany(mappedBy = "league", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Team> teams;
 
     @OneToMany(mappedBy = "league", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Match> matches;
-
-    @OneToMany(mappedBy = "league", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    private Set<Goal> goals;
 
     public League() {
 
@@ -68,14 +60,6 @@ public class League extends IdEntity {
         this.endYear = endYear;
     }
 
-    public Set<Coach> getCoaches() {
-        return coaches;
-    }
-
-    public void setCoaches(Set<Coach> coach) {
-        this.coaches = coach;
-    }
-
     public Set<Team> getTeams() {
         return teams;
     }
@@ -90,14 +74,6 @@ public class League extends IdEntity {
 
     public void setMatches(Set<Match> matches) {
         this.matches = matches;
-    }
-
-    public Set<Goal> getGoals() {
-        return goals;
-    }
-
-    public void setGoals(Set<Goal> goals) {
-        this.goals = goals;
     }
 
     @Override

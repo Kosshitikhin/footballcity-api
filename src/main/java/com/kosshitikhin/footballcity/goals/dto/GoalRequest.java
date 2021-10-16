@@ -1,4 +1,4 @@
-package com.kosshitikhin.footballcity.goals;
+package com.kosshitikhin.footballcity.goals.dto;
 
 public class GoalRequest {
 
@@ -7,8 +7,6 @@ public class GoalRequest {
     private String surname;
 
     private int minute;
-
-    private int rowGoal;
 
     public String getFirstName() {
         return firstName;
@@ -32,13 +30,5 @@ public class GoalRequest {
 
     public void setMinute(int minute) {
         this.minute = minute;
-    }
-
-    public int getRowGoal() {
-        return rowGoal;
-    }
-
-    public void setRowGoal(int rowGoal) {
-        this.rowGoal = rowGoal;
     }
 }

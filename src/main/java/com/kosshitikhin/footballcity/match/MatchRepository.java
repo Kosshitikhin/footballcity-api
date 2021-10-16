@@ -8,4 +8,8 @@ public interface MatchRepository extends JpaRepository<Match, Long> {
 
     Optional<Match> findByLeagueIdAndId(Long leagueId, Long matchId);
 
+    int countAllByLeagueIdAndHomeTeamId(Long leagueId, Long homeTeamId);
+
+    int countAllByLeagueIdAndAwayTeamId(Long leagueId, Long awayTeamId);
+
 }

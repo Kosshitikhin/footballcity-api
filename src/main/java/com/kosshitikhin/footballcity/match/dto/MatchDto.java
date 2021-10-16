@@ -1,12 +1,12 @@
 package com.kosshitikhin.footballcity.match.dto;
 
-import com.kosshitikhin.footballcity.goals.Goal;
 import com.kosshitikhin.footballcity.match.Match;
+import com.kosshitikhin.footballcity.goals.Goal;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Set;
+import java.util.List;
 
 @Slf4j
 @Getter
@@ -17,7 +17,7 @@ public class MatchDto {
     private String nameAwayTeam;
     private int homeGoals;
     private int awayGoals;
-    private Set<Goal> goals;
+    private List<Goal> goals;
 
     public MatchDto() {
     }

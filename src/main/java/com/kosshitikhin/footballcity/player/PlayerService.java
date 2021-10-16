@@ -1,10 +1,15 @@
 package com.kosshitikhin.footballcity.player;
 
+import com.kosshitikhin.footballcity.assists.AssistRepository;
+import com.kosshitikhin.footballcity.cards.CardRepository;
 import com.kosshitikhin.footballcity.common.rest.NotFoundException;
+import com.kosshitikhin.footballcity.goals.GoalRepository;
 import com.kosshitikhin.footballcity.league.League;
 import com.kosshitikhin.footballcity.league.LeagueRepository;
+import com.kosshitikhin.footballcity.match.MatchRepository;
 import com.kosshitikhin.footballcity.player.dto.PlayerDto;
 import com.kosshitikhin.footballcity.player.dto.PlayerRequest;
+import com.kosshitikhin.footballcity.statistics.player.PlayerStatisticsDto;
 import com.kosshitikhin.footballcity.team.Team;
 import com.kosshitikhin.footballcity.team.TeamRepository;
 import org.springframework.stereotype.Service;
@@ -19,11 +24,25 @@ public class PlayerService {
     private final PlayerRepository playerRepository;
     private final TeamRepository teamRepository;
     private final LeagueRepository leagueRepository;
+    private final MatchRepository matchRepository;
+    private final GoalRepository goalRepository;
+    private final AssistRepository assistRepository;
+    private final CardRepository cardRepository;
 
-    public PlayerService(PlayerRepository playerRepository, TeamRepository teamRepository, LeagueRepository leagueRepository) {
+    public PlayerService(PlayerRepository playerRepository,
+                         TeamRepository teamRepository,
+                         LeagueRepository leagueRepository,
+                         MatchRepository matchRepository,
+                         GoalRepository goalRepository,
+                         AssistRepository assistRepository,
+                         CardRepository cardRepository) {
         this.playerRepository = playerRepository;
         this.teamRepository = teamRepository;
         this.leagueRepository = leagueRepository;
+        this.matchRepository = matchRepository;
+        this.goalRepository = goalRepository;
+        this.assistRepository = assistRepository;
+        this.cardRepository = cardRepository;
     }
 
     public PlayerDto getPlayer(Long leagueId, Long playerId) {

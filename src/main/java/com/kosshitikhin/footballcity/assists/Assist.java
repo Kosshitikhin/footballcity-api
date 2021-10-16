@@ -1,10 +1,9 @@
-package com.kosshitikhin.footballcity.goals;
+package com.kosshitikhin.footballcity.assists;
 
 import com.kosshitikhin.footballcity.common.dbo.StatisticsEntity;
 import com.kosshitikhin.footballcity.league.League;
 import com.kosshitikhin.footballcity.match.Match;
 import com.kosshitikhin.footballcity.player.Player;
-import com.kosshitikhin.footballcity.team.Team;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,35 +11,24 @@ import javax.persistence.ManyToOne;
 import java.util.Objects;
 
 @Entity
-public class Goal extends StatisticsEntity {
+public class Assist extends StatisticsEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     private League league;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Match match;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Player player;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    private Team team;
-
-    public Goal() {
+    public Assist() {
     }
 
-    public Goal(String firstName, String surname, int minute) {
+    public Assist(String firstName, String surname, int minute) {
         this.firstName = firstName;
         this.surname = surname;
         this.minute = minute;
-    }
-
-    public Goal(String firstName, String surname, int minute, Match match, Player player) {
-        this.firstName = firstName;
-        this.surname = surname;
-        this.minute = minute;
-        this.match = match;
-        this.player = player;
     }
 
     public League getLeague() {
@@ -67,25 +55,18 @@ public class Goal extends StatisticsEntity {
         this.player = player;
     }
 
-    public Team getTeam() {
-        return team;
-    }
-
-    public void setTeam(Team team) {
-        this.team = team;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Goal)) return false;
-        Goal goal = (Goal) o;
-        return Objects.equals(match, goal.getMatch()) &&
-                Objects.equals(player, goal.getPlayer());
+        if (!super.equals(o)) return false;
+        Assist assist = (Assist) o;
+        return Objects.equals(league, assist.getLeague()) &&
+                Objects.equals(match, assist.getMatch()) &&
+                Objects.equals(player, assist.getPlayer());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(match, player);
+        return Objects.hash(super.hashCode(), league, match, player);
     }
 }
