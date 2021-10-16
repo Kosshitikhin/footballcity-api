@@ -2,7 +2,8 @@ package com.kosshitikhin.footballcity.player;
 
 import com.kosshitikhin.footballcity.player.dto.PlayerDto;
 import com.kosshitikhin.footballcity.player.dto.PlayerRequest;
-import com.kosshitikhin.footballcity.statistics.PlayerStatisticsDto;
+import com.kosshitikhin.footballcity.statistics.player.PlayerStatisticsDto;
+import com.kosshitikhin.footballcity.statistics.player.PlayerStatisticsService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,9 +13,11 @@ import java.util.List;
 public class PlayerController {
 
     private final PlayerService playerService;
+    private final PlayerStatisticsService playerStatisticsService;
 
-    public PlayerController(PlayerService playerService) {
+    public PlayerController(PlayerService playerService, PlayerStatisticsService playerStatisticsService) {
         this.playerService = playerService;
+        this.playerStatisticsService = playerStatisticsService;
     }
 
     @GetMapping("players/{playerId}")
@@ -26,6 +29,11 @@ public class PlayerController {
     @GetMapping("/teams/{teamId}/players")
     public List<PlayerDto> getAllPlayersOfTeam(@PathVariable Long leagueId, @PathVariable Long teamId) {
         return playerService.getAllPlayersOfTeam(leagueId, teamId);
+    }
+
+    @GetMapping("player/{playerId}/statistics")
+    public PlayerStatisticsDto getPlayerStatistics(@PathVariable Long leagueId, @PathVariable Long playerId) {
+        return playerStatisticsService.getPlayerStatisticsFromLeague(leagueId, playerId);
     }
 
     @PostMapping("/teams/{teamId}/players")
@@ -46,10 +54,5 @@ public class PlayerController {
     public void deletePlayer(@PathVariable Long leagueId,
                              @PathVariable Long playerId) {
         playerService.deletePlayer(leagueId, playerId);
-    }
-
-    @GetMapping("player/{playerId}/statistics")
-    public PlayerStatisticsDto getPlayerStatistics(@PathVariable Long leagueId, @PathVariable Long playerId) {
-        return null;
     }
 }

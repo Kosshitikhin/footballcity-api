@@ -4,6 +4,7 @@ import com.kosshitikhin.footballcity.common.dbo.StatisticsEntity;
 import com.kosshitikhin.footballcity.league.League;
 import com.kosshitikhin.footballcity.match.Match;
 import com.kosshitikhin.footballcity.player.Player;
+import com.kosshitikhin.footballcity.team.Team;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,6 +22,9 @@ public class Goal extends StatisticsEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Player player;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    private Team team;
 
     public Goal() {
     }
@@ -61,6 +65,14 @@ public class Goal extends StatisticsEntity {
 
     public void setPlayer(Player player) {
         this.player = player;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 
     @Override

@@ -45,6 +45,7 @@ public class AssistService {
 
     public void deleteAssist(Long leagueId, Long assistId) {
         Assist assist = assistRepository.findByLeagueIdAndId(leagueId, assistId).orElseThrow(NotFoundException::assist);
+        assistRepository.delete(assist);
     }
 
     public List<AssistDto> getAllAssistsOfPlayerFromLeague(Long leagueId, Long playerId) {

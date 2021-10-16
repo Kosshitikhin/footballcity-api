@@ -16,13 +16,18 @@ public class GoalController {
         this.goalService = goalService;
     }
 
-    @PostMapping("matches/{matchId}/goals/add")
-    public void addGoal(@PathVariable Long leagueId, @PathVariable Long matchId, @RequestBody GoalRequest request) {
-        goalService.addGoal(leagueId, matchId, request);
+    @PostMapping("matches/{matchId}/teams/{teamId}/goals/add")
+    public void addGoal(@PathVariable Long leagueId,
+                        @PathVariable Long matchId,
+                        @PathVariable Long teamId,
+                        @RequestBody GoalRequest request) {
+        goalService.addGoal(leagueId, matchId, teamId, request);
     }
 
     @DeleteMapping("matches/{matchId}/goals/{goalId}/delete")
-    public void deleteGoal(@PathVariable Long leagueId, @PathVariable Long matchId, @PathVariable Long goalId) {
+    public void deleteGoal(@PathVariable Long leagueId,
+                           @PathVariable Long matchId,
+                           @PathVariable Long goalId) {
         goalService.deleteGoal(leagueId, matchId, goalId);
     }
 

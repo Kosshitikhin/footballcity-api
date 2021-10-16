@@ -1,4 +1,4 @@
-package com.kosshitikhin.footballcity.statistics;
+package com.kosshitikhin.footballcity.statistics.team;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -25,9 +25,6 @@ public class TeamStatisticsDto {
 
     private int pointsScored;
 
-    public TeamStatisticsDto() {
-    }
-
     public TeamStatisticsDto(int playedGames,
                              int winGames,
                              int drawGames,
@@ -45,4 +42,5 @@ public class TeamStatisticsDto {
         this.goalDifference = goalDifference;
         this.pointsScored = pointsScored;
     }
+
 }

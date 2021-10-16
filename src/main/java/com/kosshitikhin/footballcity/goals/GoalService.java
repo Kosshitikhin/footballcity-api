@@ -7,6 +7,8 @@ import com.kosshitikhin.footballcity.league.League;
 import com.kosshitikhin.footballcity.league.LeagueRepository;
 import com.kosshitikhin.footballcity.match.Match;
 import com.kosshitikhin.footballcity.match.MatchRepository;
+import com.kosshitikhin.footballcity.player.Player;
+import com.kosshitikhin.footballcity.player.PlayerRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,21 +20,26 @@ public class GoalService {
     private final GoalRepository goalRepository;
     private final MatchRepository matchRepository;
     private final LeagueRepository leagueRepository;
+    private final PlayerRepository playerRepository;
 
     public GoalService(GoalRepository goalRepository,
                        MatchRepository matchRepository,
-                       LeagueRepository leagueRepository) {
+                       LeagueRepository leagueRepository,
+                       PlayerRepository playerRepository) {
         this.goalRepository = goalRepository;
         this.matchRepository = matchRepository;
         this.leagueRepository = leagueRepository;
+        this.playerRepository = playerRepository;
     }
 
-    public void addGoal(Long leagueId, Long matchId, GoalRequest request) {
+    public void addGoal(Long leagueId, Long matchId, Long teamId, GoalRequest request) {
         League league = leagueRepository.findById(leagueId).orElseThrow(NotFoundException::league);
         Match match = matchRepository.findById(matchId).orElseThrow(NotFoundException::match);
+        Player player = playerRepository.findByFirstNameAndSurnameAndTeamId(request.getFirstName(), request.getSurname(), teamId).orElseThrow(NotFoundException::player);
         Goal goal = new Goal(request.getFirstName(), request.getSurname(), request.getMinute());
         goal.setLeague(league);
         goal.setMatch(match);
+        goal.setPlayer(player);
         goalRepository.save(goal);
     }
 

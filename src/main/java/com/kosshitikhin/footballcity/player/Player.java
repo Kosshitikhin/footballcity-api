@@ -35,6 +35,12 @@ public class Player extends NamedEntity {
     @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Assist> assists;
 
+    private int playedGame;
+    private int goalsScored;
+    private int assist;
+    private int yellowCard;
+    private int redCard;
+
     public Player() {
 
     }
@@ -103,16 +109,61 @@ public class Player extends NamedEntity {
         this.assists = assists;
     }
 
+    public int getPlayedGame() {
+        return playedGame;
+    }
+
+    public void setPlayedGame(int playedGame) {
+        this.playedGame = playedGame;
+    }
+
+    public int getGoalsScored() {
+        return goalsScored;
+    }
+
+    public void setGoalsScored(int goalsScored) {
+        this.goalsScored = goalsScored;
+    }
+
+    public int getAssist() {
+        return assist;
+    }
+
+    public void setAssist(int assist) {
+        this.assist = assist;
+    }
+
+    public int getYellowCard() {
+        return yellowCard;
+    }
+
+    public void setYellowCard(int yellowCard) {
+        this.yellowCard = yellowCard;
+    }
+
+    public int getRedCard() {
+        return redCard;
+    }
+
+    public void setRedCard(int redCard) {
+        this.redCard = redCard;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (!super.equals(o)) return false;
         Player player = (Player) o;
         return Objects.equals(team, player.getTeam()) &&
-                Objects.equals(league, player.getLeague());
+                Objects.equals(league, player.getLeague()) &&
+                playedGame == player.getPlayedGame() &&
+                goalsScored == player.getGoalsScored() &&
+                assist == player.getAssist() &&
+                yellowCard == player.getYellowCard() &&
+                redCard == player.getRedCard();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), team, league);
+        return Objects.hash(super.hashCode(), team, league, playedGame, goalsScored, assist, yellowCard, redCard);
     }
 }

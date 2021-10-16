@@ -1,4 +1,4 @@
-package com.kosshitikhin.footballcity.statistics;
+package com.kosshitikhin.footballcity.statistics.player;
 
 public class PlayerStatisticsDto {
 
