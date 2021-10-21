@@ -9,8 +9,8 @@
 Проект находится в процессе разработки и постоянно обновляется.
 
 #первый запуск приложения
-`скопируйте ссвойства из src/main/resources/application.properties.example в src/main/resources/application.properties
-`
+`скопируйте ссвойства из src/main/resources/application.properties.example в src/main/resources/application.properties`
+
 `Установите PostgreSQL и добавьте базу данных footballcity.`
 
 `Добавьте конфигурацию в IDEA для запуска в качестве Spring Boot приложения
