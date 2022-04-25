@@ -7,7 +7,7 @@ import org.springframework.context.annotation.PropertySources;
 
 @SpringBootApplication
 @PropertySources({
-        @PropertySource(value = "classpath:application.properties", ignoreResourceNotFound = true),
+        @PropertySource(value = "classpath:application-dev.properties", ignoreResourceNotFound = true),
 })
 public class FootballCityApplication {
 
