@@ -30,8 +30,8 @@ public class MatchService {
         this.teamStatisticsService = teamStatisticsService;
     }
 
-    public MatchDto getMatch(Long leagueId, Long matchId) {
-        Match match = matchRepository.findByLeagueIdAndId(leagueId, matchId).orElseThrow(NotFoundException::match);
+    public MatchDto getMatch(Long matchId) {
+        Match match = matchRepository.findById(matchId).orElseThrow(NotFoundException::match);
         return new MatchDto(match);
     }
 
@@ -48,8 +48,8 @@ public class MatchService {
         return new MatchDto(matchRepository.save(new Match(league, homeTeam, awayTeam, matchDay, tour, homeGoals, awayGoals)));
     }
 
-    public MatchDto updateMatch(Long leagueId, Long matchId, MatchRequest request) {
-        Match match = matchRepository.findByLeagueIdAndId(leagueId, matchId).orElseThrow(NotFoundException::match);
+    public MatchDto updateMatch(Long matchId, MatchRequest request) {
+        Match match = matchRepository.findById(matchId).orElseThrow(NotFoundException::match);
         teamStatisticsService.deleteStatisticsData(match.getHomeTeam(), match.getAwayTeam(), match.getHomeGoals(), match.getAwayGoals());
 
         Team homeTeam = teamRepository.findByName(request.getNameHomeTeam()).orElseThrow(NotFoundException::team);
@@ -68,8 +68,8 @@ public class MatchService {
         return new MatchDto(matchRepository.save(match));
     }
 
-    public void deleteMatch(Long leagueId, Long matchId) {
-        Match match = matchRepository.findByLeagueIdAndId(leagueId, matchId).orElseThrow(NotFoundException::match);
+    public void deleteMatch(Long matchId) {
+        Match match = matchRepository.findById(matchId).orElseThrow(NotFoundException::match);
         teamStatisticsService.deleteStatisticsData(match.getHomeTeam(), match.getAwayTeam(), match.getHomeGoals(), match.getAwayGoals());
         matchRepository.delete(match);
     }
