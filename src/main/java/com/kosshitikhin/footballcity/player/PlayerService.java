@@ -9,7 +9,6 @@ import com.kosshitikhin.footballcity.league.LeagueRepository;
 import com.kosshitikhin.footballcity.match.MatchRepository;
 import com.kosshitikhin.footballcity.player.dto.PlayerDto;
 import com.kosshitikhin.footballcity.player.dto.PlayerRequest;
-import com.kosshitikhin.footballcity.statistics.player.PlayerStatisticsDto;
 import com.kosshitikhin.footballcity.team.Team;
 import com.kosshitikhin.footballcity.team.TeamRepository;
 import org.springframework.stereotype.Service;
@@ -45,13 +44,13 @@ public class PlayerService {
         this.cardRepository = cardRepository;
     }
 
-    public PlayerDto getPlayer(Long leagueId, Long playerId) {
-        Player player = playerRepository.findByLeagueIdAndId(leagueId, playerId).orElseThrow(NotFoundException::player);
+    public PlayerDto getPlayer(Long playerId) {
+        Player player = playerRepository.findById(playerId).orElseThrow(NotFoundException::player);
         return new PlayerDto(player);
     }
 
-    public List<PlayerDto> getAllPlayersOfTeam(Long leagueId, Long teamId) {
-        return playerRepository.findAllByLeagueIdAndTeamIdOrderBySurname(leagueId, teamId)
+    public List<PlayerDto> getAllPlayersOfTeam(Long teamId) {
+        return playerRepository.findAllByTeamId(teamId)
                 .stream()
                 .map(PlayerDto::new)
                 .collect(Collectors.toList());
@@ -68,8 +67,8 @@ public class PlayerService {
         return new PlayerDto(playerRepository.save(player));
     }
 
-    public PlayerDto updatePlayer(Long leagueId, Long playerId, PlayerRequest request) {
-        Player player = playerRepository.findByLeagueIdAndId(leagueId, playerId).orElseThrow(NotFoundException::player);
+    public PlayerDto updatePlayer(Long playerId, PlayerRequest request) {
+        Player player = playerRepository.findById(playerId).orElseThrow(NotFoundException::player);
         player.setFirstName(request.getFirstName());
         player.setSurname(request.getSurname());
         player.setPatronymic(request.getPatronymic());
@@ -78,8 +77,8 @@ public class PlayerService {
         return new PlayerDto(playerRepository.save(player));
     }
 
-    public void deletePlayer(Long leagueId, Long playerId) {
-        Player player = playerRepository.findByLeagueIdAndId(leagueId, playerId).orElseThrow(NotFoundException::player);
+    public void deletePlayer(Long playerId) {
+        Player player = playerRepository.findById(playerId).orElseThrow(NotFoundException::player);
         playerRepository.delete(player);
     }
 }

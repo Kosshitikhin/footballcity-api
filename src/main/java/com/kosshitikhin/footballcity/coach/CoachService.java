@@ -24,8 +24,8 @@ public class CoachService {
         this.teamRepository = teamRepository;
     }
 
-    public CoachDto getCoach(Long leagueId, Long coachId) {
-        Coach coach = coachRepository.findByLeagueIdAndId(leagueId, coachId).orElseThrow(NotFoundException::coach);
+    public CoachDto getCoach(Long coachId) {
+        Coach coach = coachRepository.findById(coachId).orElseThrow(NotFoundException::coach);
         return new CoachDto(coach);
     }
 
@@ -40,8 +40,8 @@ public class CoachService {
         return new CoachDto(coachRepository.save(coach));
     }
 
-    public CoachDto updateCoach(Long leagueId, Long coachId, CoachRequest request) {
-        Coach coach = coachRepository.findByLeagueIdAndId(leagueId, coachId).orElseThrow(NotFoundException::coach);
+    public CoachDto updateCoach(Long coachId, CoachRequest request) {
+        Coach coach = coachRepository.findById(coachId).orElseThrow(NotFoundException::coach);
         coach.setFirstName(request.getFirstName());
         coach.setSurname(request.getSurname());
         coach.setPatronymic(request.getPatronymic());
@@ -50,8 +50,8 @@ public class CoachService {
         return new CoachDto(coachRepository.save(coach));
     }
 
-    public void deleteCoach(Long leagueId, Long coachId) {
-        Coach coach = coachRepository.findByLeagueIdAndId(leagueId, coachId).orElseThrow(NotFoundException::coach);
+    public void deleteCoach(Long coachId) {
+        Coach coach = coachRepository.findById(coachId).orElseThrow(NotFoundException::coach);
         coachRepository.delete(coach);
     }
 }
