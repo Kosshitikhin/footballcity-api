@@ -3,16 +3,10 @@ package com.kosshitikhin.footballcity.player.dto;
 import com.kosshitikhin.footballcity.league.League;
 import com.kosshitikhin.footballcity.player.Player;
 import com.kosshitikhin.footballcity.team.Team;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDate;
 import java.time.Period;
 
-@Slf4j
-@Getter
-@Setter
 public class PlayerDto {
 
     private Long playerId;
@@ -48,5 +42,61 @@ public class PlayerDto {
             return Period.between(birthday, LocalDate.now()).getYears();
         }
         return 0;
+    }
+
+    public Long getPlayerId() {
+        return playerId;
+    }
+
+    public void setPlayerId(Long playerId) {
+        this.playerId = playerId;
+    }
+
+    public Long getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(Long teamId) {
+        this.teamId = teamId;
+    }
+
+    public Long getLeagueId() {
+        return leagueId;
+    }
+
+    public void setLeagueId(Long leagueId) {
+        this.leagueId = leagueId;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getPatronymic() {
+        return patronymic;
+    }
+
+    public void setPatronymic(String patronymic) {
+        this.patronymic = patronymic;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }

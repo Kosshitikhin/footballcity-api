@@ -3,7 +3,7 @@ package com.kosshitikhin.footballcity.statistics.player;
 import com.kosshitikhin.footballcity.assists.AssistRepository;
 import com.kosshitikhin.footballcity.cards.Card;
 import com.kosshitikhin.footballcity.cards.CardRepository;
-import com.kosshitikhin.footballcity.common.rest.NotFoundException;
+import com.kosshitikhin.footballcity.common.rest.exception.NotFoundException;
 import com.kosshitikhin.footballcity.goals.GoalRepository;
 import com.kosshitikhin.footballcity.match.MatchRepository;
 import com.kosshitikhin.footballcity.player.PlayerRepository;

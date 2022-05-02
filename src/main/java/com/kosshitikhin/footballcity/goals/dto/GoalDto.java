@@ -8,9 +8,9 @@ public class GoalDto {
 
     private String surname;
 
-    private int minute;
+    private Integer minute;
 
-    public GoalDto(String firstName, String surname, int minute) {
+    public GoalDto(String firstName, String surname, Integer minute) {
         this.firstName = firstName;
         this.surname = surname;
         this.minute = minute;
@@ -38,11 +38,11 @@ public class GoalDto {
         this.surname = surname;
     }
 
-    public int getMinute() {
+    public Integer getMinute() {
         return minute;
     }
 
-    public void setMinute(int minute) {
+    public void setMinute(Integer minute) {
         this.minute = minute;
     }
 }

@@ -1,8 +1,9 @@
 package com.kosshitikhin.footballcity.goals;
 
-import com.kosshitikhin.footballcity.common.rest.NotFoundException;
+import com.kosshitikhin.footballcity.common.rest.exception.NotFoundException;
 import com.kosshitikhin.footballcity.goals.dto.GoalDto;
 import com.kosshitikhin.footballcity.goals.dto.GoalRequest;
+import com.kosshitikhin.footballcity.goals.dto.GoalUpdateRequest;
 import com.kosshitikhin.footballcity.league.League;
 import com.kosshitikhin.footballcity.league.LeagueRepository;
 import com.kosshitikhin.footballcity.match.Match;
@@ -43,8 +44,24 @@ public class GoalService {
         goalRepository.save(goal);
     }
 
-    public void deleteGoal(Long leagueId, Long matchId, Long goalId) {
-        Goal goal = goalRepository.findByLeagueIdAndMatchIdAndId(leagueId, matchId, goalId).orElseThrow(NotFoundException::goal);
+    public GoalDto editGoal(Long goalId, GoalUpdateRequest request) {
+        Goal goal = goalRepository.findById(goalId).orElseThrow(NotFoundException::goal);
+
+        if (request.getFirstName() != null) {
+            goal.setFirstName(request.getFirstName());
+        }
+        if (request.getSurname() != null) {
+            goal.setSurname(request.getSurname());
+        }
+        if (request.getMinute() != null) {
+            goal.setMinute(request.getMinute());
+        }
+
+        return new GoalDto(goalRepository.save(goal));
+    }
+
+    public void deleteGoal(Long goalId) {
+        Goal goal = goalRepository.findById(goalId).orElseThrow(NotFoundException::goal);
         goalRepository.delete(goal);
     }
 

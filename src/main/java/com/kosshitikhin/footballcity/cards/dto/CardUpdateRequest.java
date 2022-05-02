@@ -2,21 +2,18 @@ package com.kosshitikhin.footballcity.cards.dto;
 
 import com.kosshitikhin.footballcity.cards.Card;
 
-import javax.validation.constraints.NotNull;
+public class CardUpdateRequest {
 
-public class CardRequest {
-
-    @NotNull
     private String firstName;
 
-    @NotNull
     private String surname;
 
-    @NotNull
-    private int minute;
+    private Integer minute;
 
-    @NotNull
     private Card.Color color;
+
+    public CardUpdateRequest() {
+    }
 
     public String getFirstName() {
         return firstName;
@@ -34,11 +31,11 @@ public class CardRequest {
         this.surname = surname;
     }
 
-    public int getMinute() {
+    public Integer getMinute() {
         return minute;
     }
 
-    public void setMinute(int minute) {
+    public void setMinute(Integer minute) {
         this.minute = minute;
     }
 

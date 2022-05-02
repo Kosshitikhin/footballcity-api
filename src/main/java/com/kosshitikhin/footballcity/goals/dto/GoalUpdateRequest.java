@@ -1,17 +1,15 @@
-package com.kosshitikhin.footballcity.assists.dto;
+package com.kosshitikhin.footballcity.goals.dto;
 
-import javax.validation.constraints.NotNull;
+public class GoalUpdateRequest {
 
-public class AssistRequest {
-
-    @NotNull
     private String firstName;
 
-    @NotNull
     private String surname;
 
-    @NotNull
-    private int minute;
+    private Integer minute;
+
+    public GoalUpdateRequest() {
+    }
 
     public String getFirstName() {
         return firstName;
@@ -29,11 +27,11 @@ public class AssistRequest {
         this.surname = surname;
     }
 
-    public int getMinute() {
+    public Integer getMinute() {
         return minute;
     }
 
-    public void setMinute(int minute) {
+    public void setMinute(Integer minute) {
         this.minute = minute;
     }
 }

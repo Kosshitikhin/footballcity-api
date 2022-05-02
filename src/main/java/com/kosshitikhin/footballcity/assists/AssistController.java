@@ -1,13 +1,11 @@
 package com.kosshitikhin.footballcity.assists;
 
 import com.kosshitikhin.footballcity.assists.dto.AssistDto;
-import com.kosshitikhin.footballcity.assists.dto.AssistRequest;
+import com.kosshitikhin.footballcity.assists.dto.AssistUpdateRequest;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("league/{leagueId}")
+@RequestMapping("assists")
 public class AssistController {
 
     private final AssistService assistService;
@@ -16,21 +14,14 @@ public class AssistController {
         this.assistService = assistService;
     }
 
-    @PostMapping("matches/{matchId}/players/{playerId}/assists/add")
-    public void addAssist(@PathVariable Long leagueId,
-                          @PathVariable Long matchId,
-                          @PathVariable Long playerId,
-                          @RequestBody AssistRequest request) {
-        assistService.addAssist(leagueId, matchId, playerId, request);
+    @PutMapping("{assistId}")
+    public AssistDto editAssist(@PathVariable Long assistId, @RequestBody AssistUpdateRequest request) {
+        return assistService.editAssist(assistId, request);
     }
 
-    @DeleteMapping("assists/{assistId}/delete")
-    public void deleteAssist(@PathVariable Long leagueId, @PathVariable Long assistId) {
-        assistService.deleteAssist(leagueId, assistId);
+    @DeleteMapping("{assistId}")
+    public void deleteAssist(@PathVariable Long assistId) {
+        assistService.deleteAssist(assistId);
     }
 
-    @GetMapping("players/{playerId}")
-    public List<AssistDto> getAllAssistsOfPlayerFromLeague(@PathVariable Long leagueId, @PathVariable Long playerId) {
-        return assistService.getAllAssistsOfPlayerFromLeague(leagueId, playerId);
-    }
 }

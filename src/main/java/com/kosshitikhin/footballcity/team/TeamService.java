@@ -1,10 +1,8 @@
 package com.kosshitikhin.footballcity.team;
 
-import com.kosshitikhin.footballcity.common.rest.NotFoundException;
-import com.kosshitikhin.footballcity.league.League;
-import com.kosshitikhin.footballcity.league.LeagueRepository;
+import com.kosshitikhin.footballcity.common.rest.exception.NotFoundException;
 import com.kosshitikhin.footballcity.team.dto.TeamDto;
-import com.kosshitikhin.footballcity.team.dto.TeamRequest;
+import com.kosshitikhin.footballcity.team.dto.UpdateTeamRequest;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -15,15 +13,13 @@ import java.util.stream.Collectors;
 public class TeamService {
 
     private final TeamRepository teamRepository;
-    private final LeagueRepository leagueRepository;
 
-    public TeamService(TeamRepository teamRepository, LeagueRepository leagueRepository) {
+    public TeamService(TeamRepository teamRepository) {
         this.teamRepository = teamRepository;
-        this.leagueRepository = leagueRepository;
     }
 
-    public TeamDto getOneTeamFromLeague(Long leagueId, Long teamId) {
-        Team team = teamRepository.findByLeagueIdAndId(leagueId, teamId).orElseThrow(NotFoundException::team);
+    public TeamDto getTeam(Long teamId) {
+        Team team = teamRepository.findById(teamId).orElseThrow(NotFoundException::team);
         return new TeamDto(team);
     }
 
@@ -34,22 +30,21 @@ public class TeamService {
                 .collect(Collectors.toList());
     }
 
-    public TeamDto addTeam(Long leagueId, TeamRequest request) {
-        League league = leagueRepository.findById(leagueId).orElseThrow(NotFoundException::league);
-        Team team = new Team(request.getName());
-        team.setLeague(league);
+    //todo access rights
+    public TeamDto updateTeam(Long teamId, UpdateTeamRequest request) {
+        Team team = teamRepository.findById(teamId).orElseThrow(NotFoundException::team);
+
+        if (request.getName() != null) {
+            team.setName(request.getName());
+        }
+
         return new TeamDto(teamRepository.save(team));
     }
 
-    public TeamDto updateTeam(Long leagueId, Long teamId, TeamRequest request) {
-        Team team = teamRepository.findByLeagueIdAndId(leagueId, teamId).orElseThrow(NotFoundException::team);
-        team.setName(request.getName());
-        return new TeamDto(teamRepository.save(team));
-    }
-
+    //todo access rights
     @Transactional
-    public void deleteTeam(Long leagueId, Long teamId) {
-        Team team = teamRepository.findByLeagueIdAndId(leagueId, teamId).orElseThrow(NotFoundException::team);
+    public void deleteTeam(Long teamId) {
+        Team team = teamRepository.findById(teamId).orElseThrow(NotFoundException::team);
         teamRepository.delete(team);
     }
 }

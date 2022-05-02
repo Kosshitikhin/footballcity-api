@@ -1,32 +1,12 @@
 package com.kosshitikhin.footballcity.league.dto;
 
-import com.kosshitikhin.footballcity.league.League;
-
-public class LeagueDto {
-
-    private Long leagueId;
+public class UpdateLeagueRequest {
 
     private String name;
 
     private String startYear;
 
     private String endYear;
-
-    public LeagueDto(League league) {
-        this.leagueId = league.getId();
-        this.name = league.getName();
-        this.startYear = league.getStartYear();
-        this.endYear = league.getEndYear();
-    }
-
-
-    public Long getLeagueId() {
-        return leagueId;
-    }
-
-    public void setLeagueId(Long leagueId) {
-        this.leagueId = leagueId;
-    }
 
     public String getName() {
         return name;

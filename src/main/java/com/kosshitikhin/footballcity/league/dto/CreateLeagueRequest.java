@@ -1,16 +1,16 @@
 package com.kosshitikhin.footballcity.league.dto;
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
-public class LeagueRequest {
+public class CreateLeagueRequest {
 
-    @NotEmpty
+    @NotNull
     private String name;
 
-    @NotEmpty
+    @NotNull
     private String startYear;
 
-    @NotEmpty
+    @NotNull
     private String endYear;
 
     public String getName() {
