@@ -9,7 +9,6 @@ import com.kosshitikhin.footballcity.league.dto.UpdateLeagueRequest;
 import com.kosshitikhin.footballcity.player.PlayerService;
 import com.kosshitikhin.footballcity.player.dto.PlayerDto;
 import com.kosshitikhin.footballcity.player.dto.PlayerRequest;
-import com.kosshitikhin.footballcity.statistics.player.PlayerStatisticsDto;
 import com.kosshitikhin.footballcity.statistics.player.PlayerStatisticsService;
 import com.kosshitikhin.footballcity.statistics.team.TeamStatisticsDto;
 import com.kosshitikhin.footballcity.statistics.team.TeamStatisticsService;
@@ -62,19 +61,9 @@ public class LeagueController {
         return teamService.getAllTeamsFromLeague(leagueId);
     }
 
-    @GetMapping("{leagueId}/league-table")
-    public List<TeamStatisticsDto> getLeagueTable(@PathVariable Long leagueId) {
-        return teamStatisticsService.getAllTeamStatisticsFromLeague(leagueId);
-    }
-
     @GetMapping("{leagueId}/teams/{teamId}/statistics")
     public TeamStatisticsDto getTeamStatisticsFromLeague(@PathVariable Long leagueId, @PathVariable Long teamId) {
         return teamStatisticsService.getTeamStatisticsFromLeague(leagueId, teamId);
-    }
-
-    @GetMapping("{leagueId}/players/{playerId}/statistic")
-    public PlayerStatisticsDto getPlayerStatistics(@PathVariable Long leagueId, @PathVariable Long playerId) {
-        return playerStatisticsService.getPlayerStatisticsFromLeague(leagueId, playerId);
     }
 
     @PostMapping

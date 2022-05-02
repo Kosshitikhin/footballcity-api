@@ -2,7 +2,7 @@ package com.kosshitikhin.footballcity.assists.dto;
 
 import javax.validation.constraints.NotNull;
 
-public class AssistRequest {
+public class AssistUpdateRequest {
 
     @NotNull
     private String firstName;
@@ -11,7 +11,10 @@ public class AssistRequest {
     private String surname;
 
     @NotNull
-    private int minute;
+    private Integer minute;
+
+    public AssistUpdateRequest() {
+    }
 
     public String getFirstName() {
         return firstName;
@@ -29,11 +32,11 @@ public class AssistRequest {
         this.surname = surname;
     }
 
-    public int getMinute() {
+    public Integer getMinute() {
         return minute;
     }
 
-    public void setMinute(int minute) {
+    public void setMinute(Integer minute) {
         this.minute = minute;
     }
 }

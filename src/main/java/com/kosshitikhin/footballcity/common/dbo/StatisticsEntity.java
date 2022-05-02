@@ -5,7 +5,7 @@ import javax.persistence.MappedSuperclass;
 import java.util.Objects;
 
 @MappedSuperclass
-public class StatisticsEntity extends IdEntity {
+public abstract class StatisticsEntity extends IdEntity {
 
     @Column(nullable = false)
     protected String firstName;
@@ -14,12 +14,12 @@ public class StatisticsEntity extends IdEntity {
     protected String surname;
 
     @Column(nullable = false)
-    protected int minute;
+    protected Integer minute;
 
     public StatisticsEntity() {
     }
 
-    public StatisticsEntity(Long id, String firstName, String surname, int minute) {
+    public StatisticsEntity(Long id, String firstName, String surname, Integer minute) {
         super(id);
         this.firstName = firstName;
         this.surname = surname;
@@ -42,11 +42,11 @@ public class StatisticsEntity extends IdEntity {
         this.surname = surname;
     }
 
-    public int getMinute() {
+    public Integer getMinute() {
         return minute;
     }
 
-    public void setMinute(int minute) {
+    public void setMinute(Integer minute) {
         this.minute = minute;
     }
 

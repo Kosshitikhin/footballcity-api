@@ -37,15 +37,15 @@ public class Match extends IdEntity {
     @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Assist> assists;
 
-    private int tour;
-    private int homeGoals;
-    private int awayGoals;
+    private Integer tour;
+    private Integer homeGoals;
+    private Integer awayGoals;
 
     public Match() {
 
     }
 
-    public Match(League league, Team homeTeam, Team awayTeam, LocalDateTime matchDay, int tour, int homeGoals, int awayGoals) {
+    public Match(League league, Team homeTeam, Team awayTeam, LocalDateTime matchDay, Integer tour, Integer homeGoals, Integer awayGoals) {
         this.league = league;
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
@@ -87,27 +87,27 @@ public class Match extends IdEntity {
         this.matchDay = matchDay;
     }
 
-    public int getTour() {
+    public Integer getTour() {
         return tour;
     }
 
-    public void setTour(int tour) {
+    public void setTour(Integer tour) {
         this.tour = tour;
     }
 
-    public int getHomeGoals() {
+    public Integer getHomeGoals() {
         return homeGoals;
     }
 
-    public void setHomeGoals(int homeGoals) {
+    public void setHomeGoals(Integer homeGoals) {
         this.homeGoals = homeGoals;
     }
 
-    public int getAwayGoals() {
+    public Integer getAwayGoals() {
         return awayGoals;
     }
 
-    public void setAwayGoals(int awayGoals) {
+    public void setAwayGoals(Integer awayGoals) {
         this.awayGoals = awayGoals;
     }
 
@@ -141,9 +141,9 @@ public class Match extends IdEntity {
         if (!(o instanceof Match)) return false;
         if (!super.equals(o)) return false;
         Match match = (Match) o;
-        return tour == match.tour &&
-                homeGoals == match.homeGoals &&
-                awayGoals == match.awayGoals &&
+        return  Objects.equals(tour, match.tour) &&
+                Objects.equals(homeGoals, match.homeGoals) &&
+                Objects.equals(awayGoals, match.awayGoals) &&
                 Objects.equals(homeTeam, match.homeTeam) &&
                 Objects.equals(awayTeam, match.awayTeam) &&
                 Objects.equals(matchDay, match.matchDay);

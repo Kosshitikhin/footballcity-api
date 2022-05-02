@@ -2,7 +2,8 @@ package com.kosshitikhin.footballcity.assists;
 
 import com.kosshitikhin.footballcity.assists.dto.AssistDto;
 import com.kosshitikhin.footballcity.assists.dto.AssistRequest;
-import com.kosshitikhin.footballcity.common.rest.NotFoundException;
+import com.kosshitikhin.footballcity.assists.dto.AssistUpdateRequest;
+import com.kosshitikhin.footballcity.common.rest.exception.NotFoundException;
 import com.kosshitikhin.footballcity.league.League;
 import com.kosshitikhin.footballcity.league.LeagueRepository;
 import com.kosshitikhin.footballcity.match.Match;
@@ -43,8 +44,23 @@ public class AssistService {
         assistRepository.save(assist);
     }
 
-    public void deleteAssist(Long leagueId, Long assistId) {
-        Assist assist = assistRepository.findByLeagueIdAndId(leagueId, assistId).orElseThrow(NotFoundException::assist);
+    public AssistDto editAssist(Long assistId, AssistUpdateRequest request) {
+        Assist assist = assistRepository.findById(assistId).orElseThrow(NotFoundException::assist);
+        if (request.getFirstName() != null) {
+            assist.setFirstName(request.getFirstName());
+        }
+        if (request.getSurname() != null) {
+            assist.setSurname(request.getSurname());
+        }
+        if (request.getMinute() != null) {
+            assist.setMinute(request.getMinute());
+        }
+
+       return new AssistDto(assistRepository.save(assist));
+    }
+
+    public void deleteAssist(Long assistId) {
+        Assist assist = assistRepository.findById(assistId).orElseThrow(NotFoundException::assist);
         assistRepository.delete(assist);
     }
 

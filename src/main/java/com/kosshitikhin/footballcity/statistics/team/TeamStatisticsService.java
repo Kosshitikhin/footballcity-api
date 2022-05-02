@@ -1,6 +1,6 @@
 package com.kosshitikhin.footballcity.statistics.team;
 
-import com.kosshitikhin.footballcity.common.rest.NotFoundException;
+import com.kosshitikhin.footballcity.common.rest.exception.NotFoundException;
 import com.kosshitikhin.footballcity.match.MatchRepository;
 import com.kosshitikhin.footballcity.team.Team;
 import com.kosshitikhin.footballcity.team.TeamRepository;

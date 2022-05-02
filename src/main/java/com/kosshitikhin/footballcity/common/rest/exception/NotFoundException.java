@@ -1,4 +1,4 @@
-package com.kosshitikhin.footballcity.common.rest;
+package com.kosshitikhin.footballcity.common.rest.exception;
 
 public class NotFoundException extends RuntimeException{
 

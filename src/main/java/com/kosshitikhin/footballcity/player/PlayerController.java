@@ -1,7 +1,7 @@
 package com.kosshitikhin.footballcity.player;
 
 import com.kosshitikhin.footballcity.player.dto.PlayerDto;
-import com.kosshitikhin.footballcity.player.dto.PlayerRequest;
+import com.kosshitikhin.footballcity.player.dto.PlayerUpdateRequest;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,7 +21,7 @@ public class PlayerController {
 
     @PutMapping("{playerId}")
     public PlayerDto updatePlayer(@PathVariable Long playerId,
-                                  @RequestBody PlayerRequest request) {
+                                  @RequestBody PlayerUpdateRequest request) {
         return playerService.updatePlayer(playerId, request);
     }
 

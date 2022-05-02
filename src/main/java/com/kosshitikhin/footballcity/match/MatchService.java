@@ -1,6 +1,6 @@
 package com.kosshitikhin.footballcity.match;
 
-import com.kosshitikhin.footballcity.common.rest.NotFoundException;
+import com.kosshitikhin.footballcity.common.rest.exception.NotFoundException;
 import com.kosshitikhin.footballcity.league.League;
 import com.kosshitikhin.footballcity.league.LeagueRepository;
 import com.kosshitikhin.footballcity.match.dto.MatchDto;

@@ -14,16 +14,16 @@ public class MatchRequest {
     private String nameAwayTeam;
 
     @NotNull
-    private int homeGoals;
+    private Integer homeGoals;
 
     @NotNull
-    private int awayGoals;
+    private Integer awayGoals;
 
     @NotNull
     private LocalDateTime matchDay;
 
     @NotNull
-    private int tour;
+    private Integer tour;
 
     private Set<Goal> authorsOfGoals;
 

@@ -85,7 +85,7 @@ public class Card extends StatisticsEntity {
         if (this == o) return true;
         if (!(o instanceof Card)) return false;
         Card card = (Card) o;
-        return minute == card.getMinute() &&
+        return Objects.equals(minute, card.minute) &&
                 Objects.equals(firstName, card.getFirstName()) &&
                 Objects.equals(surname, card.getSurname()) &&
                 color == card.getColor() &&

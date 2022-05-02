@@ -2,7 +2,8 @@ package com.kosshitikhin.footballcity.coach;
 
 import com.kosshitikhin.footballcity.coach.dto.CoachDto;
 import com.kosshitikhin.footballcity.coach.dto.CoachRequest;
-import com.kosshitikhin.footballcity.common.rest.NotFoundException;
+import com.kosshitikhin.footballcity.coach.dto.CoachUpdateRequest;
+import com.kosshitikhin.footballcity.common.rest.exception.NotFoundException;
 import com.kosshitikhin.footballcity.league.League;
 import com.kosshitikhin.footballcity.league.LeagueRepository;
 import com.kosshitikhin.footballcity.team.Team;
@@ -40,12 +41,21 @@ public class CoachService {
         return new CoachDto(coachRepository.save(coach));
     }
 
-    public CoachDto updateCoach(Long coachId, CoachRequest request) {
+    public CoachDto updateCoach(Long coachId, CoachUpdateRequest request) {
         Coach coach = coachRepository.findById(coachId).orElseThrow(NotFoundException::coach);
-        coach.setFirstName(request.getFirstName());
-        coach.setSurname(request.getSurname());
-        coach.setPatronymic(request.getPatronymic());
-        coach.setBirthday(request.getBirthday());
+
+        if (request.getFirstName() != null) {
+            coach.setFirstName(request.getFirstName());
+        }
+        if (request.getSurname() != null) {
+            coach.setSurname(request.getSurname());
+        }
+        if (request.getPatronymic() != null) {
+            coach.setPatronymic(request.getPatronymic());
+        }
+        if (request.getBirthday() != null) {
+            coach.setBirthday(request.getBirthday());
+        }
 
         return new CoachDto(coachRepository.save(coach));
     }

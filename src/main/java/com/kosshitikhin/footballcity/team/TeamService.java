@@ -1,8 +1,7 @@
 package com.kosshitikhin.footballcity.team;
 
-import com.kosshitikhin.footballcity.common.rest.NotFoundException;
+import com.kosshitikhin.footballcity.common.rest.exception.NotFoundException;
 import com.kosshitikhin.footballcity.team.dto.TeamDto;
-import com.kosshitikhin.footballcity.team.dto.TeamRequest;
 import com.kosshitikhin.footballcity.team.dto.UpdateTeamRequest;
 import org.springframework.stereotype.Service;
 

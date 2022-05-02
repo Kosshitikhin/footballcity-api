@@ -1,11 +1,16 @@
 package com.kosshitikhin.footballcity.goals.dto;
 
+import javax.validation.constraints.NotNull;
+
 public class GoalRequest {
 
+    @NotNull
     private String firstName;
 
+    @NotNull
     private String surname;
 
+    @NotNull
     private int minute;
 
     public String getFirstName() {

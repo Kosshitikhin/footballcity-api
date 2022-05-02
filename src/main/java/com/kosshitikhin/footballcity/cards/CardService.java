@@ -2,7 +2,8 @@ package com.kosshitikhin.footballcity.cards;
 
 import com.kosshitikhin.footballcity.cards.dto.CardDto;
 import com.kosshitikhin.footballcity.cards.dto.CardRequest;
-import com.kosshitikhin.footballcity.common.rest.NotFoundException;
+import com.kosshitikhin.footballcity.cards.dto.CardUpdateRequest;
+import com.kosshitikhin.footballcity.common.rest.exception.NotFoundException;
 import com.kosshitikhin.footballcity.league.League;
 import com.kosshitikhin.footballcity.league.LeagueRepository;
 import com.kosshitikhin.footballcity.match.Match;
@@ -43,8 +44,26 @@ public class CardService {
         cardRepository.save(card);
     }
 
-    public void deleteCard(Long leagueId, Long cardId) {
-        Card card = cardRepository.findByLeagueIdAndId(leagueId, cardId).orElseThrow(NotFoundException::card);
+    public CardDto editCard(Long cardId, CardUpdateRequest request) {
+        Card card = cardRepository.findById(cardId).orElseThrow(NotFoundException::card);
+        if (request.getFirstName() != null) {
+            card.setFirstName(request.getFirstName());
+        }
+        if (request.getSurname() != null) {
+            card.setSurname(request.getSurname());
+        }
+        if (request.getMinute() != null) {
+            card.setMinute(request.getMinute());
+        }
+        if (request.getColor() != null) {
+            card.setColor(request.getColor());
+        }
+
+        return new CardDto(cardRepository.save(card));
+    }
+
+    public void deleteCard(Long cardId) {
+        Card card = cardRepository.findById(cardId).orElseThrow(NotFoundException::card);
         cardRepository.delete(card);
     }
 
