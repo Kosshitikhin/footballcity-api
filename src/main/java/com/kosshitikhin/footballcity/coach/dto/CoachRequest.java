@@ -1,15 +1,8 @@
 package com.kosshitikhin.footballcity.coach.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
-
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
-@Slf4j
-@Setter
-@Getter
 public class CoachRequest {
 
     @NotNull
@@ -24,4 +17,38 @@ public class CoachRequest {
     @NotNull
     private LocalDate birthday;
 
+    public CoachRequest() {
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getPatronymic() {
+        return patronymic;
+    }
+
+    public void setPatronymic(String patronymic) {
+        this.patronymic = patronymic;
+    }
+
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
+    }
 }

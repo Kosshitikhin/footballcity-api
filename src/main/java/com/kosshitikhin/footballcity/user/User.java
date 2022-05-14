@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -24,10 +25,18 @@ public class User extends IdEntity {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(nullable = false, unique = true)
+    private String passHash;
     private boolean active;
 
     @Column(nullable = false)
     private String roles;
+
+    private Date lastPasswordResetTime;
+
+    private String confirmCode;
+
+    private String fcmToken;
 
     public User() {
 
@@ -64,6 +73,14 @@ public class User extends IdEntity {
         this.email = email;
     }
 
+    public String getPassHash() {
+        return passHash;
+    }
+
+    public void setPassHash(String passHash) {
+        this.passHash = passHash;
+    }
+
     public boolean isActive() {
         return active;
     }
@@ -78,6 +95,30 @@ public class User extends IdEntity {
 
     public void setRoles(String roles) {
         this.roles = roles;
+    }
+
+    public Date getLastPasswordResetTime() {
+        return lastPasswordResetTime;
+    }
+
+    public void setLastPasswordResetTime(Date lastPasswordResetTime) {
+        this.lastPasswordResetTime = lastPasswordResetTime;
+    }
+
+    public String getConfirmCode() {
+        return confirmCode;
+    }
+
+    public void setConfirmCode(String confirmCode) {
+        this.confirmCode = confirmCode;
+    }
+
+    public String getFcmToken() {
+        return fcmToken;
+    }
+
+    public void setFcmToken(String fcmToken) {
+        this.fcmToken = fcmToken;
     }
 
     public enum Role implements GrantedAuthority {
@@ -107,11 +148,14 @@ public class User extends IdEntity {
         return isActive() == user.isActive() &&
                 Objects.equals(firstName, user.getFirstName()) &&
                 Objects.equals(surname, user.getSurname()) &&
-                Objects.equals(email, user.getEmail());
+                Objects.equals(passHash, user.passHash) &&
+                Objects.equals(lastPasswordResetTime, user.lastPasswordResetTime) &&
+                Objects.equals(email, user.getEmail()) &&
+                Objects.equals(confirmCode, user.confirmCode);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), firstName, surname, email, isActive());
+        return Objects.hash(super.hashCode(), firstName, surname, email, active, lastPasswordResetTime, confirmCode);
     }
 }

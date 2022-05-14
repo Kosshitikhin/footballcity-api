@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="60">
+    <Properties>
+        <Property name="log-path">${sys:jboss.server.base.dir}/log</Property>
+        <Property name="app">cash4trash</Property>
+    </Properties>
+    <Appenders>
+        <RollingFile name="info-log" fileName="${log-path}/${app}.log"
+                     filePattern="${log-path}/${app}.%d{yyyy-MM-dd}.log.gz">
+            <PatternLayout>
+                <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <!--daily rollover-->
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+            <!--max 30 files-->
+            <DefaultRolloverStrategy max="30"/>
+        </RollingFile>
+        <RollingFile name="error-log" fileName="${log-path}/${app}-error.log"
+                     filePattern="${log-path}/${app}-error.%d{yyyy-MM-dd}.log.gz">
+            <PatternLayout>
+                <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <!--daily rollover-->
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+            <!--max 30 files-->
+            <DefaultRolloverStrategy max="30"/>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Root level="trace">
+            <AppenderRef ref="error-log" level="error"/>
+            <AppenderRef ref="info-log" level="info"/>
+        </Root>
+    </Loggers>
+</Configuration>

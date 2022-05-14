@@ -7,10 +7,15 @@ public class ConflictException extends RuntimeException {
     }
 
     public static ConflictException player() {
-        return new ConflictException("Such a player already exists in the team.");
+        return new ConflictException("Such a player already exists.");
     }
 
     public static ConflictException team() {
-        return new ConflictException("Such a team already exists in the league.");
+        return new ConflictException("Such a team already exists.");
     }
+
+    public static ConflictException active() {
+        return new ConflictException("Such a user already active.");
+    }
+
 }

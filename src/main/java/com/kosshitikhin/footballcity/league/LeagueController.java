@@ -9,7 +9,6 @@ import com.kosshitikhin.footballcity.league.dto.UpdateLeagueRequest;
 import com.kosshitikhin.footballcity.player.PlayerService;
 import com.kosshitikhin.footballcity.player.dto.PlayerDto;
 import com.kosshitikhin.footballcity.player.dto.PlayerRequest;
-import com.kosshitikhin.footballcity.statistics.player.PlayerStatisticsService;
 import com.kosshitikhin.footballcity.statistics.team.TeamStatisticsDto;
 import com.kosshitikhin.footballcity.statistics.team.TeamStatisticsService;
 import com.kosshitikhin.footballcity.team.TeamService;
@@ -27,7 +26,6 @@ public class LeagueController {
     private final LeagueService leagueService;
     private final TeamStatisticsService teamStatisticsService;
     private final TeamService teamService;
-    private final PlayerStatisticsService playerStatisticsService;
     private final PlayerService playerService;
 
     private final CoachService coachService;
@@ -35,13 +33,11 @@ public class LeagueController {
     public LeagueController(LeagueService leagueService,
                             TeamStatisticsService teamStatisticsService,
                             TeamService teamService,
-                            PlayerStatisticsService playerStatisticsService,
                             PlayerService playerService,
                             CoachService coachService) {
         this.leagueService = leagueService;
         this.teamStatisticsService = teamStatisticsService;
         this.teamService = teamService;
-        this.playerStatisticsService = playerStatisticsService;
         this.playerService = playerService;
         this.coachService = coachService;
     }
