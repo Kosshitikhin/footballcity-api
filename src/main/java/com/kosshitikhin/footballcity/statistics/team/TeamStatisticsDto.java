@@ -1,12 +1,5 @@
 package com.kosshitikhin.footballcity.statistics.team;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
-@Getter
-@Setter
 public class TeamStatisticsDto {
 
     private int playedGames;
@@ -43,4 +36,67 @@ public class TeamStatisticsDto {
         this.pointsScored = pointsScored;
     }
 
+    public int getPlayedGames() {
+        return playedGames;
+    }
+
+    public void setPlayedGames(int playedGames) {
+        this.playedGames = playedGames;
+    }
+
+    public int getWinGames() {
+        return winGames;
+    }
+
+    public void setWinGames(int winGames) {
+        this.winGames = winGames;
+    }
+
+    public int getDrawGames() {
+        return drawGames;
+    }
+
+    public void setDrawGames(int drawGames) {
+        this.drawGames = drawGames;
+    }
+
+    public int getLostGames() {
+        return lostGames;
+    }
+
+    public void setLostGames(int lostGames) {
+        this.lostGames = lostGames;
+    }
+
+    public int getScoredGoals() {
+        return scoredGoals;
+    }
+
+    public void setScoredGoals(int scoredGoals) {
+        this.scoredGoals = scoredGoals;
+    }
+
+    public int getConcededGoals() {
+        return concededGoals;
+    }
+
+    public void setConcededGoals(int concededGoals) {
+        this.concededGoals = concededGoals;
+    }
+
+    public int getGoalDifference() {
+        return goalDifference;
+    }
+
+    public void setGoalDifference(int goalDifference) {
+        this.goalDifference = goalDifference;
+    }
+
+    public int getPointsScored() {
+        return pointsScored;
+    }
+
+    public void setPointsScored(int pointsScored) {
+        this.pointsScored = pointsScored;
+    }
 }

@@ -146,11 +146,12 @@ public class Match extends IdEntity {
                 Objects.equals(awayGoals, match.awayGoals) &&
                 Objects.equals(homeTeam, match.homeTeam) &&
                 Objects.equals(awayTeam, match.awayTeam) &&
+                Objects.equals(league, match.league) &&
                 Objects.equals(matchDay, match.matchDay);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), homeTeam, awayTeam, matchDay, tour, homeGoals, awayGoals);
+        return Objects.hash(super.hashCode(), homeTeam, awayTeam, matchDay, tour, homeGoals, awayGoals, league);
     }
 }

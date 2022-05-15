@@ -81,11 +81,13 @@ public class Goal extends StatisticsEntity {
         if (!(o instanceof Goal)) return false;
         Goal goal = (Goal) o;
         return Objects.equals(match, goal.getMatch()) &&
-                Objects.equals(player, goal.getPlayer());
+                Objects.equals(player, goal.player) &&
+                Objects.equals(league, goal.league) &&
+                Objects.equals(team, goal.team);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(match, player);
+        return Objects.hash(match, player, league, team);
     }
 }

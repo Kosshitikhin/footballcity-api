@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="/opt/wildfly/log4j2-footballcity.xml">
+    <xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="log4j2-dev.xml"/>
+    </xi:fallback>
+</xi:include>
