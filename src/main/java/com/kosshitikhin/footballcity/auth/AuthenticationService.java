@@ -45,6 +45,11 @@ public class AuthenticationService {
     public JWTResponse authenticate(JWTRequest request) throws Exception {
         try {
             UserDetailsImpl userDetails = (UserDetailsImpl) authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())).getPrincipal();
+            if (request.getFcmToken() != null) {
+                User user = userDetails.getUser();
+                user.setFcmToken(request.getFcmToken());
+                userRepository.save(user);
+            }
             return jwtTokenUtil.generateToken(userDetails);
         } catch (DisabledException e) {
             throw new Exception("USER_DISABLED", e);
@@ -149,6 +154,7 @@ public class AuthenticationService {
 
     private void updatePassword(User user, String newPassword) {
         user.setPassHash(passwordEncoder.encode(newPassword));
+        user.setConfirmCode("");
         user.setLastPasswordResetTime(new Date());
         userRepository.save(user);
     }

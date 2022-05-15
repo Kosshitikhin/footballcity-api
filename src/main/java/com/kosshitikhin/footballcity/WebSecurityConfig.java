@@ -9,39 +9,40 @@ import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-@Order(2)
+@Order(1)
+@EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends GeneralWebSecurityConfig {
     private final JWTAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JWTRequestFilter jwtRequestFilter;
 
-    public WebSecurityConfig(GeneralUserDetailsService userDetailsService, JWTAuthenticationEntryPoint jwtAuthenticationEntryPoint, JWTRequestFilter jwtRequestFilter, PasswordEncoder passwordEncoder) {
-        super(userDetailsService, passwordEncoder);
+    public WebSecurityConfig(GeneralUserDetailsService generalUserDetailsService, JWTAuthenticationEntryPoint jwtAuthenticationEntryPoint, JWTRequestFilter jwtRequestFilter) {
+        super(generalUserDetailsService);
         this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
         this.jwtRequestFilter = jwtRequestFilter;
     }
+
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 // We don't need CSRF for this example
                 .csrf().disable()
-                // dont authenticate this particular request
+                // don't authenticate this particular request
                 .authorizeRequests()
-                .antMatchers("monitoring/**").permitAll()
-                .antMatchers(HttpMethod.POST, "auth/*").permitAll()
-                // all other requests need to be authenticated
-                .anyRequest().authenticated()
-                // make sure we use stateless session; session won't be used to
-                // store user's state.
+                .antMatchers("/monitoring/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/auth/*").permitAll()
+                .anyRequest()
+                .authenticated()
                 .and().exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         // Add a filter to validate the tokens with every request
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
+
 }

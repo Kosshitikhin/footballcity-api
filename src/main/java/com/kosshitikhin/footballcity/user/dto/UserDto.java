@@ -12,8 +12,8 @@ public class UserDto extends IdDto {
     private String email;
     private Set<User.Role> roles;
     private boolean active;
-
     private String fcmToken;
+    private String confirmCode;
 
     public UserDto() {
     }
@@ -26,6 +26,7 @@ public class UserDto extends IdDto {
         this.roles = user.getRoles();
         this.active = user.isActive();
         this.fcmToken = user.getFcmToken();
+        this.confirmCode = user.getConfirmCode();
     }
 
     public String getFirstName() {
@@ -74,5 +75,13 @@ public class UserDto extends IdDto {
 
     public void setFcmToken(String fcmToken) {
         this.fcmToken = fcmToken;
+    }
+
+    public String getConfirmCode() {
+        return confirmCode;
+    }
+
+    public void setConfirmCode(String confirmCode) {
+        this.confirmCode = confirmCode;
     }
 }

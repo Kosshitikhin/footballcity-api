@@ -11,6 +11,8 @@ public class JWTRequest {
     @NotNull
     private String password;
 
+    private String fcmToken;
+
     public JWTRequest() {
     }
 
@@ -28,5 +30,13 @@ public class JWTRequest {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getFcmToken() {
+        return fcmToken;
+    }
+
+    public void setFcmToken(String fcmToken) {
+        this.fcmToken = fcmToken;
     }
 }

@@ -1,5 +1,8 @@
 package com.kosshitikhin.footballcity.user;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.kosshitikhin.footballcity.common.dbo.IdEntity;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -39,7 +42,8 @@ public class User extends IdEntity {
     private String fcmToken;
 
     public User() {
-
+        this.firstName = "";
+        this.surname = "";
     }
 
     public User(String firstName, String surname, String email) {
@@ -121,13 +125,21 @@ public class User extends IdEntity {
         this.fcmToken = fcmToken;
     }
 
+    @JsonFormat(shape = JsonFormat.Shape.OBJECT)
     public enum Role implements GrantedAuthority {
-        USER("USER"),
-        ADMIN("ADMIN");
+        ADMIN("ROLE_ADMIN"),
+        USER("ROLE_USER");
+
+        @JsonProperty
         private final String text;
 
         Role(final String text) {
             this.text = text;
+        }
+
+        @JsonProperty
+        public String getName() {
+            return this.name();
         }
 
         @Override
@@ -136,6 +148,7 @@ public class User extends IdEntity {
         }
 
         @Override
+        @JsonIgnore
         public String getAuthority() {
             return text;
         }
