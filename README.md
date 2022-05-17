@@ -14,6 +14,6 @@
 
 `Установите PostgreSQL и добавьте базу данных footballcity.`
 
-`Добавьте конфигурацию в IDEA для запуска в качестве Spring Boot приложения
+`Добавьте конфигурацию в IDEA для запуска в качестве Spring Boot приложения`
 
-`Swagger API документация: http://localhost:8081/aspect-api/swagger-ui/'
+`Swagger API документация: http://localhost:8081/aspect-api/swagger-ui/ `
